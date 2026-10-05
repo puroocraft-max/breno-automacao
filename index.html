@@ -17,37 +17,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap">
 <style>
-/* Layout: abertura escura com um sistema real em primeiro plano; depois o visitante marca as dores da empresa
+/* Visual único escuro (escolha deliberada, igual à abertura).
+   Layout: abertura escura com um sistema real em primeiro plano; depois o visitante marca as dores da empresa
    (a página responde com a solução certa), as 3 soluções como fluxos, o exemplo de contabilidade contado como
    um dia de trabalho, e o método. Telas de app têm visual fixo, como software de verdade. */
 :root{
-  --paper:#F3F5F2; --card:#FFFFFF; --ink:#14201B; --muted:#5A665F; --line:#D9DFD6;
-  --accent:#2350F0; --accent-ink:#FFFFFF; --marker:#FFD34D; --ok:#1E8A4C; --bad:#C2412D;
-  --shadow:0 1px 0 rgba(20,32,27,.05), 0 24px 50px -28px rgba(20,32,27,.4);
+  --paper:#0B1411; --card:#111C17; --ink:#F0F4EF; --muted:#A3B2A9; --line:#24332B;
+  --accent:#8FA5FF; --accent-ink:#0B1230; --marker:#FFD34D; --ok:#4CC27E; --bad:#F08A73;
+  --shadow:0 1px 0 rgba(0,0,0,.4), 0 30px 60px -30px rgba(0,0,0,.9);
   --h-bg:#0B1411; --h-ink:#F0F4EF; --h-muted:#A3B2A9; --h-line:#22312A;
   --a-bg:#F6F7F9; --a-card:#FFFFFF; --a-ink:#141A22; --a-muted:#667080; --a-line:#E3E6EB; --a-side:#101828;
   --a-blue:#2350F0; --a-green:#13895A; --a-amber:#B7791F; --a-red:#C2412D;
   --f-sans:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --f-num:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
-  color-scheme:light;
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#0E1512; --card:#15201B; --ink:#E8EDE7; --muted:#A0ABA4; --line:#28362F;
-  --accent:#7D95FF; --accent-ink:#0B1230; --marker:#E9BC35; --ok:#4CC27E; --bad:#F08A73;
-  --shadow:0 1px 0 rgba(0,0,0,.4), 0 24px 50px -28px rgba(0,0,0,.9);
-  color-scheme:dark;
-}}
-:root[data-theme="dark"]{
-  --paper:#0E1512; --card:#15201B; --ink:#E8EDE7; --muted:#A0ABA4; --line:#28362F;
-  --accent:#7D95FF; --accent-ink:#0B1230; --marker:#E9BC35; --ok:#4CC27E; --bad:#F08A73;
-  --shadow:0 1px 0 rgba(0,0,0,.4), 0 24px 50px -28px rgba(0,0,0,.9);
   color-scheme:dark;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--f-sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--f-sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+html{overflow-x:clip}
 a{color:inherit}
 img{max-width:100%}
 .wrap{max-width:1180px;margin:0 auto;padding-inline:20px}
@@ -57,7 +47,7 @@ h1{font-size:clamp(36px,5vw,64px);font-weight:800;line-height:1.08;letter-spacin
 h2{font-size:clamp(30px,4vw,48px);font-weight:800;line-height:1.12;letter-spacing:-.02em}
 h3{font-size:21px;font-weight:700;line-height:1.25;letter-spacing:-.015em}
 p{margin:0}
-.hl{background:linear-gradient(transparent 62%,var(--marker) 62%,var(--marker) 92%,transparent 92%);padding-inline:.05em}
+.hl{color:var(--marker)}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
 
 .btn{display:inline-flex;align-items:center;gap:10px;font:700 16px/1.2 var(--f-sans);text-decoration:none;padding:16px 24px;border-radius:999px;border:1.5px solid currentColor;transition:transform .15s ease,box-shadow .15s;cursor:pointer}
@@ -68,7 +58,8 @@ p{margin:0}
 .btn svg{width:20px;height:20px;flex:none}
 
 /* ---------- abertura ---------- */
-.top{background:var(--h-bg);color:var(--h-ink);position:relative;overflow:hidden;color-scheme:dark}
+.top{background:var(--h-bg);color:var(--h-ink);position:relative;overflow:clip;padding-top:calc(65px + env(safe-area-inset-top,0px))}
+section[id],.top[id]{scroll-margin-top:72px}
 .fx{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 .fx-glow{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;will-change:transform}
 .fx-glow.g1{width:620px;height:620px;left:52%;top:42%;background:radial-gradient(circle,#2350F0,transparent 65%);animation:drift1 16s ease-in-out infinite alternate}
@@ -84,7 +75,7 @@ p{margin:0}
 .fx-dots span{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--marker);box-shadow:0 0 12px 2px rgba(255,211,77,.7);animation:twinkle 4s ease-in-out infinite}
 @keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}
 .top > *:not(.fx){position:relative;z-index:1}
-.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(11,20,17,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--h-line)}
+.nav{position:fixed;top:0;left:0;right:0;padding-top:env(safe-area-inset-top,0px);z-index:30;background:rgba(11,20,17,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--h-line)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 .brand-mark{width:36px;height:36px;border-radius:10px;background:var(--marker);color:#14201B;display:grid;place-items:center;font:800 19px/1 var(--f-sans)}
@@ -181,8 +172,9 @@ p{margin:0}
 @media (max-width:760px){
   .kpis{grid-template-columns:1fr 1fr}
   .grid2{grid-template-columns:1fr}
-  .phone{position:relative;right:auto;bottom:auto;margin:-120px auto 0;width:230px}
-  .showcase{padding-bottom:30px;padding-right:0}
+  .phone{position:relative;right:auto;bottom:auto;margin-inline:auto;width:230px}
+  .showcase{padding-bottom:30px;padding-right:0;display:flex;flex-direction:column}
+  .showcase .win{order:1}.showcase .phone{order:2;margin-top:24px;z-index:2}.showcase .toast{order:3;margin-top:22px}
   .win{border-radius:14px;border-bottom:1px solid #2b3b33}
   .toast{position:relative;left:auto;bottom:auto;margin:16px auto 0;width:min(300px,100%)}
   .hide-sm{display:none}
@@ -199,22 +191,31 @@ section{padding-block:96px}
 .sec-head{display:flex;flex-direction:column;gap:14px;max-width:780px;margin-bottom:40px}
 .sec-head p{color:var(--muted);font-size:18.5px;max-width:62ch}
 .band{border-top:1px solid var(--line)}
-.dotted{position:relative;background-image:radial-gradient(color-mix(in srgb,var(--ink) 13%,transparent) 1.2px,transparent 1.3px);background-size:22px 22px;background-position:0 var(--py,0px)}
 .lift{transition:transform .25s ease,box-shadow .25s ease}
-.lift:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.lift:hover{transform:translateY(-4px);box-shadow:0 30px 70px -30px rgba(35,80,240,.55);border-color:#3A55C4}
 @media (max-width:700px){section{padding-block:66px}}
+
+
+/* fundo das seções: mesma linguagem da abertura (grade, luzes, parallax) */
+.zone{position:relative;overflow:clip;isolation:isolate}
+.zone > .wrap{position:relative;z-index:1}
+.zfx{position:absolute;inset:0;pointer-events:none;z-index:0}
+.zfx-grid{position:absolute;inset:-25% -5%;background-image:linear-gradient(rgba(150,185,170,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(150,185,170,.13) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 55% 45% at var(--gx,20%) var(--gy,30%),#000 10%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 55% 45% at var(--gx,20%) var(--gy,30%),#000 10%,transparent 70%);will-change:transform}
+.zfx-glow{position:absolute;width:520px;height:520px;border-radius:50%;filter:blur(80px);opacity:.32;left:var(--lx,70%);top:var(--ly,20%);background:radial-gradient(circle,var(--lc,#2350F0),transparent 65%);will-change:transform;animation:drift1 18s ease-in-out infinite alternate}
+.zfx-glow.two{width:360px;height:360px;opacity:.2;left:var(--lx2,5%);top:var(--ly2,65%);background:radial-gradient(circle,var(--lc2,#FFD34D),transparent 65%);animation:drift2 21s ease-in-out infinite alternate}
+@media (max-width:700px){.zfx-glow{width:340px;height:340px}.zfx-glow.two{width:240px;height:240px}}
 
 /* dores: marque o que acontece */
 .pains{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.pain{display:flex;gap:14px;align-items:center;text-align:left;font:600 16.5px/1.4 var(--f-sans);color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:18px 20px;cursor:pointer;transition:border-color .15s,background .15s,transform .15s}
-.pain:hover{border-color:var(--ink)}
+.pain{backdrop-filter:blur(6px);display:flex;gap:14px;align-items:center;text-align:left;font:600 16.5px/1.4 var(--f-sans);color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:18px 20px;cursor:pointer;transition:border-color .15s,background .15s,transform .15s}
+.pain:hover{border-color:#8FA5FF;transform:translateY(-2px)}
 .pain .box{width:24px;height:24px;border-radius:7px;border:2px solid var(--line);flex:none;display:grid;place-items:center;transition:background .15s,border-color .15s}
 .pain .box svg{width:15px;height:15px;color:#14201B;opacity:0}
 .pain[aria-pressed="true"]{border-color:var(--marker);background:color-mix(in srgb,var(--marker) 16%,var(--card))}
 .pain[aria-pressed="true"] .box{background:var(--marker);border-color:var(--marker)}
 .pain[aria-pressed="true"] .box svg{opacity:1}
 .verdict{margin-top:18px;border-radius:18px;padding:22px 26px;display:flex;flex-wrap:wrap;gap:14px 26px;align-items:center;justify-content:space-between;background:var(--card);border:1px dashed var(--line);min-height:84px}
-.verdict.on{background:var(--h-bg);color:var(--h-ink);border:1px solid var(--h-bg)}
+.verdict.on{background:linear-gradient(135deg,#17307F,#10231C);color:var(--h-ink);border:1px solid #3A55C4;box-shadow:0 20px 60px -25px rgba(35,80,240,.7)}
 .verdict p{font-size:17px;color:var(--muted);max-width:66ch}
 .verdict.on p{color:var(--h-muted)}
 .verdict.on p b{color:var(--h-ink)}
@@ -223,7 +224,7 @@ section{padding-block:96px}
 
 /* soluções como fluxos */
 .sols{display:flex;flex-direction:column;gap:20px}
-.sol{display:grid;grid-template-columns:1fr 1fr;gap:30px;background:var(--card);border:1.5px solid var(--line);border-radius:24px;padding:34px;align-items:center;transition:border-color .2s,box-shadow .2s;position:relative}
+.sol{display:grid;grid-template-columns:1fr 1fr;gap:30px;background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.015));backdrop-filter:blur(6px);border:1.5px solid var(--line);border-radius:24px;padding:34px;align-items:center;transition:border-color .2s,box-shadow .2s;position:relative}
 .sol.match{border-color:var(--marker);box-shadow:0 0 0 4px color-mix(in srgb,var(--marker) 30%,transparent)}
 .sol .badge-match{position:absolute;top:-13px;left:28px;background:var(--marker);color:#14201B;font:700 12.5px var(--f-sans);padding:5px 11px;border-radius:999px;display:none}
 .sol.match .badge-match{display:block}
@@ -271,12 +272,12 @@ section{padding-block:96px}
 .kc .st{align-self:flex-start;margin-top:3px}
 
 /* funil */
-.funnel{margin-top:26px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px}
+.funnel{margin-top:26px;background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:22px;padding:28px}
 .funnel h3{margin-bottom:6px}
 .funnel > p{color:var(--muted);margin-bottom:18px}
 .stages{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}
 .stages div{border-top:5px solid var(--line);padding-top:8px;font-size:14px;font-weight:700;min-width:0}
-.stages .a{border-color:#2350F0}.stages .c{border-color:var(--marker)}.stages .d{border-color:var(--ok)}
+.stages .a{border-color:#5B7BFF}.stages .c{border-color:var(--marker)}.stages .d{border-color:var(--ok)}
 .legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:16px;font-size:14px;color:var(--muted)}
 .legend span{display:flex;align-items:center;gap:8px}
 .legend i{width:16px;height:5px;border-radius:3px}
@@ -285,8 +286,8 @@ section{padding-block:96px}
 /* exemplo: um dia no escritório */
 .switch{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px;gap:4px;margin-bottom:30px;box-shadow:var(--shadow)}
 .switch button{font:700 15px/1 var(--f-sans);border:0;background:transparent;color:var(--muted);padding:13px 20px;border-radius:999px;cursor:pointer}
-.switch button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
-.switch button.with[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.switch button[aria-pressed="true"]{background:#2A3A33;color:var(--ink)}
+.switch button.with[aria-pressed="true"]{background:#2350F0;color:#fff}
 .day{display:flex;flex-direction:column;border-left:2px solid var(--line);margin-left:8px}
 .hour{position:relative;display:grid;grid-template-columns:84px 1fr;gap:18px;padding:0 0 28px 26px}
 .hour::before{content:"";position:absolute;left:-8px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--paper);border:3px solid var(--bad)}
@@ -297,8 +298,8 @@ section{padding-block:96px}
 .hour p{color:var(--muted);font-size:16.5px}
 .hour:last-child{padding-bottom:0}
 .day-sum{margin-top:30px;border-radius:18px;padding:22px 26px;display:flex;flex-wrap:wrap;gap:12px 30px;align-items:center;justify-content:space-between;font-size:17px;font-weight:600}
-.day-sum.bad{background:color-mix(in srgb,var(--bad) 10%,var(--card));color:var(--ink)}
-.day-sum.good{background:var(--accent);color:var(--accent-ink)}
+.day-sum.bad{background:color-mix(in srgb,var(--bad) 12%,var(--card));color:var(--ink);border:1px solid color-mix(in srgb,var(--bad) 35%,transparent)}
+.day-sum.good{background:linear-gradient(135deg,#2350F0,#17307F);color:#fff;box-shadow:0 20px 60px -25px rgba(35,80,240,.8)}
 .day-sum .btn{padding:13px 18px;font-size:15px}
 .fade{animation:fade .35s ease}
 @keyframes fade{from{opacity:.25;transform:translateY(4px)}to{opacity:1;transform:none}}
@@ -320,7 +321,7 @@ section{padding-block:96px}
 @media (max-width:520px){.method{grid-template-columns:1fr}}
 
 /* compromisso */
-.founder{background:var(--h-bg);color:var(--h-ink);border-radius:26px;padding:54px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;position:relative;overflow:hidden}
+.founder{background:linear-gradient(150deg,#13241D,#0F1A33);border:1px solid #2C3D35;box-shadow:0 40px 90px -40px rgba(35,80,240,.6);color:var(--h-ink);border-radius:26px;padding:54px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;position:relative;overflow:hidden}
 .founder::before{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;background:radial-gradient(circle,rgba(255,211,77,.18),transparent 65%)}
 .founder::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(140,170,155,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(140,170,155,.09) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(120deg,transparent 30%,#000 90%);-webkit-mask-image:linear-gradient(120deg,transparent 30%,#000 90%);pointer-events:none}
 .founder > *{position:relative;z-index:1}
@@ -353,7 +354,7 @@ section{padding-block:96px}
 .faq details p{padding:0 0 22px;color:var(--muted);max-width:62ch}
 @media (max-width:860px){.two{grid-template-columns:1fr;gap:36px}}
 
-.end{background:var(--h-bg);color:var(--h-ink);text-align:center;position:relative;overflow:hidden}
+.end{border-top:1px solid var(--line);background:var(--h-bg);color:var(--h-ink);text-align:center;position:relative;overflow:hidden}
 .end::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 300px at 50% 110%,rgba(35,80,240,.45),transparent 70%)}
 .end::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(140,170,155,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(140,170,155,.12) 1px,transparent 1px);background-size:56px 56px;background-position:0 var(--py,0px);mask-image:radial-gradient(ellipse 60% 70% at 50% 50%,#000 20%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 60% 70% at 50% 50%,#000 20%,transparent 75%);pointer-events:none}
 .end .wrap{z-index:1}
@@ -368,16 +369,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
 <body>
 
 
-<div class="top" id="topo">
-  <div class="fx" aria-hidden="true">
-    <div class="fx-glow g1" data-depth="0.12"></div>
-    <div class="fx-glow g2" data-depth="0.25"></div>
-    <div class="fx-glow g3" data-depth="0.18"></div>
-    <div class="fx-grid" data-depth="0.35"></div>
-    <div class="fx-floor" data-depth="0.08"><i></i></div>
-    <div class="fx-dots" data-depth="0.5"><span style="left:12%;top:22%"></span><span style="left:86%;top:16%;animation-delay:1.2s"></span><span style="left:74%;top:38%;animation-delay:2.1s"></span><span style="left:22%;top:48%;animation-delay:.6s"></span><span style="left:58%;top:12%;animation-delay:3s"></span><span style="left:6%;top:70%;animation-delay:1.7s"></span></div>
-  </div>
-  <header class="nav">
+<header class="nav">
     <div class="wrap">
       <a class="brand" href="#topo" aria-label="Início">
         <span class="brand-mark">B</span>
@@ -392,6 +384,16 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
       </nav>
     </div>
   </header>
+<div class="top" id="topo">
+  <div class="fx" aria-hidden="true">
+    <div class="fx-glow g1" data-depth="0.12"></div>
+    <div class="fx-glow g2" data-depth="0.25"></div>
+    <div class="fx-glow g3" data-depth="0.18"></div>
+    <div class="fx-grid" data-depth="0.35"></div>
+    <div class="fx-floor" data-depth="0.08"><i></i></div>
+    <div class="fx-dots" data-depth="0.5"><span style="left:12%;top:22%"></span><span style="left:86%;top:16%;animation-delay:1.2s"></span><span style="left:74%;top:38%;animation-delay:2.1s"></span><span style="left:22%;top:48%;animation-delay:.6s"></span><span style="left:58%;top:12%;animation-delay:3s"></span><span style="left:6%;top:70%;animation-delay:1.7s"></span></div>
+  </div>
+
 
   <div class="wrap hero">
     <span class="pill"><b>Sob medida</b> Automação e sistemas para empresas de serviço</span>
@@ -486,7 +488,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
 </div>
 
 <main>
-  <section id="diagnostico" class="dotted">
+  <section id="diagnostico" class="zone"><div class="zfx" aria-hidden="true" style="--gx:80%;--gy:20%;--lx:62%;--ly:-10%;--lc:#2350F0;--lx2:-8%;--ly2:55%;--lc2:#FFD34D"><div class="zfx-grid" data-depth="0.18"></div><div class="zfx-glow" data-depth="0.1"></div><div class="zfx-glow two" data-depth="0.26"></div></div>
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">Onde você perde tempo</span>
@@ -507,7 +509,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
     </div>
   </section>
 
-  <section id="solucoes" class="band">
+  <section id="solucoes" class="band zone"><div class="zfx" aria-hidden="true" style="--gx:15%;--gy:12%;--lx:-12%;--ly:8%;--lc:#19B37A;--lx2:70%;--ly2:60%;--lc2:#2350F0"><div class="zfx-grid" data-depth="0.18"></div><div class="zfx-glow" data-depth="0.1"></div><div class="zfx-glow two" data-depth="0.26"></div></div>
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">Soluções</span>
@@ -603,7 +605,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
           <div class="a">Contato</div><div class="a">Atendimento</div><div class="a">Qualificação</div><div class="c">Orçamento</div><div class="c">Proposta</div><div class="c">Follow-up</div><div class="c">Venda</div><div class="d">Pós-venda</div>
         </div>
         <div class="legend">
-          <span><i style="background:#2350F0"></i>Atendimento no WhatsApp</span>
+          <span><i style="background:#5B7BFF"></i>Atendimento no WhatsApp</span>
           <span><i style="background:var(--marker)"></i>Orçamento e follow-up</span>
           <span><i style="background:var(--ok)"></i>Relatórios, lembretes e renovação</span>
         </div>
@@ -611,7 +613,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
     </div>
   </section>
 
-  <section id="exemplo" class="band dotted">
+  <section id="exemplo" class="band zone"><div class="zfx" aria-hidden="true" style="--gx:85%;--gy:35%;--lx:65%;--ly:30%;--lc:#2350F0;--lx2:-6%;--ly2:-5%;--lc2:#FFD34D"><div class="zfx-grid" data-depth="0.18"></div><div class="zfx-glow" data-depth="0.1"></div><div class="zfx-glow two" data-depth="0.26"></div></div>
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">Exemplo · escritório de contabilidade</span>
@@ -627,7 +629,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
     </div>
   </section>
 
-  <section id="metodo" class="band">
+  <section id="metodo" class="band zone"><div class="zfx" aria-hidden="true" style="--gx:20%;--gy:30%;--lx:-10%;--ly:10%;--lc:#FFD34D;--lx2:75%;--ly2:50%;--lc2:#19B37A"><div class="zfx-grid" data-depth="0.18"></div><div class="zfx-glow" data-depth="0.1"></div><div class="zfx-glow two" data-depth="0.26"></div></div>
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">Como trabalho</span>
@@ -653,7 +655,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
     </div>
   </section>
 
-  <section id="compromisso" style="padding-block:8px 96px">
+  <section id="compromisso" class="zone" style="padding-block:8px 96px"><div class="zfx" aria-hidden="true" style="--gx:50%;--gy:50%;--lx:40%;--ly:0%;--lc:#2350F0;--lx2:80%;--ly2:70%;--lc2:#FFD34D"><div class="zfx-grid" data-depth="0.18"></div><div class="zfx-glow" data-depth="0.1"></div><div class="zfx-glow two" data-depth="0.26"></div></div>
     <div class="wrap">
       <div class="founder">
         <div class="founder-copy">
@@ -672,7 +674,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
     </div>
   </section>
 
-  <section id="perguntas" class="band">
+  <section id="perguntas" class="band zone"><div class="zfx" aria-hidden="true" style="--gx:75%;--gy:40%;--lx:70%;--ly:40%;--lc:#19B37A;--lx2:-10%;--ly2:10%;--lc2:#2350F0"><div class="zfx-grid" data-depth="0.18"></div><div class="zfx-glow" data-depth="0.1"></div><div class="zfx-glow two" data-depth="0.26"></div></div>
     <div class="wrap two">
       <div class="about">
         <span class="eyebrow">Quem faz</span>
@@ -810,7 +812,8 @@ if (toast && !matchMedia("(prefers-reduced-motion: reduce)").matches){
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const layers = [...document.querySelectorAll(".fx [data-depth]")];
   const showcase = document.querySelector(".showcase");
-  const dotted = [...document.querySelectorAll(".dotted, #endBand")];
+  const dotted = [...document.querySelectorAll("#endBand")];
+  const zones = [...document.querySelectorAll(".zfx")].map(z => ({ z, sec: z.parentElement, layers: [...z.querySelectorAll("[data-depth]")] }));
   let mx = 0, my = 0, sy = window.scrollY, ticking = false;
   function render(){
     ticking = false;
@@ -818,7 +821,16 @@ if (toast && !matchMedia("(prefers-reduced-motion: reduce)").matches){
       const d = parseFloat(l.dataset.depth);
       l.style.translate = (mx * d * 40) + "px " + (sy * d + my * d * 30) + "px";
     });
-    if (showcase) showcase.style.translate = "0 " + (-sy * 0.06) + "px";
+    if (showcase) showcase.style.translate = innerWidth > 760 ? "0 " + (-Math.min(sy, 600) * 0.06) + "px" : "";
+    zones.forEach(({ sec, layers: ls }) => {
+      const r = sec.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > innerHeight + 200) return;
+      const off = r.top + r.height / 2 - innerHeight / 2;
+      ls.forEach(l => {
+        const d = parseFloat(l.dataset.depth);
+        l.style.translate = (mx * d * 50) + "px " + (-off * d) + "px";
+      });
+    });
     dotted.forEach(el => {
       const r = el.getBoundingClientRect();
       el.style.setProperty("--py", (r.top * -0.25) + "px");
