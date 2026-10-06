@@ -1,0 +1,1308 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Contabilidade consultiva para empresas de serviço, comércio e profissionais liberais.">
+<meta property="og:title" content="Lumen Contabilidade">
+<meta property="og:description" content="Contabilidade consultiva para empresas de serviço, comércio e profissionais liberais.">
+<meta name="theme-color" content="#0a0d14">
+<meta name="robots" content="noindex">
+<title>Lumen Contabilidade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&family=Instrument+Serif:ital@0;1&display=swap">
+<script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__anim)document.documentElement.classList.remove("js")},2500);</script>
+<style>
+/* Lumen Contabilidade (demonstração)
+   Conceito: "fintech de verdade para a contabilidade" — seções escuras (produto, reforma) alternando com papel claro (serviços, planos).
+   Tipografia: Geist para interface e texto, Instrument Serif itálico só para as palavras de ênfase, Geist Mono para dados. */
+:root{
+  --ink:#0a0d14; --ink-2:#111624; --ink-3:#1a2133;
+  --paper:#f5f4f0; --paper-2:#ebe9e2; --card:#ffffff;
+  --text:#0e1320; --muted:#5d6372; --muted-d:#97a0b3;
+  --line:#dedbd2; --line-d:rgba(255,255,255,.09);
+  --brand:#4a72ff; --brand-2:#86a2ff; --brand-ink:#ffffff;
+  --amber:#ffb547; --mint:#45d39a; --rose:#ff7a6b;
+  --sans:"Geist", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --serif:"Instrument Serif", Georgia, "Times New Roman", serif;
+  --mono:"Geist Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r:18px; --r-s:12px;
+  --max:1200px;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{margin:0;background:var(--paper);color:var(--text);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:8px}
+h1,h2,h3,h4{margin:0;line-height:1.05;letter-spacing:-.025em;text-wrap:balance;font-weight:600}
+p{margin:0}
+em.s{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:20px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font:500 .74rem/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--brand)}
+.dark .eyebrow{color:var(--muted-d)}
+.h2{font-size:clamp(2.1rem,5vw,3.6rem)}
+.lede{font-size:clamp(1.02rem,1.6vw,1.16rem);color:var(--muted);max-width:36em}
+.dark .lede{color:var(--muted-d)}
+.sec{padding-block:clamp(72px,10vw,128px)}
+.sec-head{display:grid;gap:18px;margin-bottom:clamp(36px,5vw,56px);max-width:760px}
+.dark{background:var(--ink);color:#eef1f7;color-scheme:dark}
+
+/* botões */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:50px;padding:0 22px;border-radius:999px;border:0;cursor:pointer;text-decoration:none;font-weight:600;font-size:.96rem;white-space:nowrap;transition:transform .25s ease,background .25s ease,box-shadow .25s ease}
+.btn-p{background:var(--brand);color:var(--brand-ink);box-shadow:0 10px 30px -12px rgba(74,114,255,.8),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn-p:hover{background:#3a63f5;transform:translateY(-1px)}
+.btn-g{background:transparent;color:inherit;box-shadow:inset 0 0 0 1px currentColor}
+.dark .btn-g{box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.btn-g:hover{background:rgba(127,127,127,.12)}
+.btn-w{background:#fff;color:var(--ink)}
+.btn .arr{transition:transform .25s ease}
+.btn:hover .arr{transform:translateX(3px)}
+.btn-s{height:40px;padding:0 16px;font-size:.88rem}
+
+/* faixa demo */
+.demo-strip{position:relative;z-index:60;background:var(--amber);color:#2a1b00;font-size:.82rem;text-align:center;padding:8px 44px 8px 16px}
+.demo-strip b{font-weight:600}
+.demo-strip button{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:0;cursor:pointer;font-size:1.1rem;line-height:1;padding:6px}
+
+/* navegação */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;transition:background .3s ease,box-shadow .3s ease}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px}
+.nav.scrolled{background:rgba(10,13,20,.78);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);box-shadow:0 1px 0 var(--line-d)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:600;letter-spacing:-.02em;font-size:1.08rem}
+.logo-mark{width:30px;height:30px;flex:none}
+.nav-links{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.nav-links a{display:block;padding:8px 12px;border-radius:999px;color:rgba(255,255,255,.72);text-decoration:none;font-size:.92rem;font-weight:500}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.nav-cta{display:flex;gap:8px;align-items:center}
+.nav .btn-g{color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.burger{display:none;width:44px;height:44px;border-radius:12px;border:0;background:rgba(255,255,255,.08);cursor:pointer;color:#fff}
+.burger span{display:block;width:18px;height:2px;background:currentColor;margin:4px auto;border-radius:2px;transition:transform .3s ease,opacity .3s ease}
+.nav.open .burger span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav.open .burger span:nth-child(2){opacity:0}
+.nav.open .burger span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mnav{display:none}
+
+/* hero */
+.hero{position:relative;overflow:hidden;margin-top:-72px;padding-top:72px;isolation:isolate}
+#field{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:block;-webkit-mask-image:linear-gradient(100deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.25) 40%,#000 70%);mask-image:linear-gradient(100deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.25) 40%,#000 70%)}
+@media (max-width:900px){#field{-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.15) 0%,rgba(0,0,0,.2) 45%,#000 75%);mask-image:linear-gradient(to bottom,rgba(0,0,0,.15) 0%,rgba(0,0,0,.2) 45%,#000 75%)}}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:160px;background:linear-gradient(to bottom,transparent,var(--ink));z-index:-1;pointer-events:none}
+.glow{position:absolute;z-index:-1;border-radius:50%;filter:blur(80px);pointer-events:none}
+.glow.a{width:620px;height:620px;left:52%;top:-180px;background:radial-gradient(circle,rgba(74,114,255,.55),transparent 65%)}
+.glow.b{width:420px;height:420px;left:-120px;top:280px;background:radial-gradient(circle,rgba(255,181,71,.18),transparent 65%)}
+.hero-grid{display:grid;grid-template-columns:1.02fr 1fr;gap:48px;align-items:center;padding-block:56px 96px;min-height:min(820px,calc(100svh - 40px))}
+.hero h1{font-size:clamp(2.7rem,6.6vw,5.4rem);font-weight:600;letter-spacing:-.045em;line-height:.98}
+.hero h1 em.s{color:var(--brand-2)}
+.hero .lede{margin-top:24px;font-size:clamp(1.05rem,1.7vw,1.2rem)}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.assure{display:flex;flex-wrap:wrap;gap:8px 18px;margin:30px 0 0;padding:0;list-style:none;color:var(--muted-d);font-size:.88rem}
+.assure li{display:flex;align-items:center;gap:8px}
+.assure svg{color:var(--mint);flex:none}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border-radius:999px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px var(--line-d);font-size:.84rem;color:#dfe5f2;text-decoration:none;margin-bottom:26px}
+.pill b{background:var(--brand);color:#fff;border-radius:999px;padding:3px 9px;font-size:.72rem;font-weight:600;letter-spacing:.02em}
+
+/* palco 3D do hero */
+.stage{position:relative;height:560px;perspective:1400px;min-width:0}
+.stage-inner{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(8deg) rotateY(-14deg);transition:transform .2s linear}
+.ui{position:absolute;background:linear-gradient(180deg,rgba(28,35,54,.92),rgba(17,22,36,.94));border-radius:16px;box-shadow:0 30px 80px -30px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#e9edf6}
+.ui-main{left:4%;top:9%;width:84%;height:74%;padding:18px;transform:translateZ(0)}
+.ui-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--line-d)}
+.dots{display:flex;gap:6px}.dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.16)}
+.ui-title{font-size:.8rem;color:var(--muted-d);font-family:var(--mono)}
+.ui-body{display:grid;grid-template-columns:130px 1fr;gap:16px;padding-top:16px;height:calc(100% - 40px)}
+.ui-side{display:grid;align-content:start;gap:4px;font-size:.8rem;color:var(--muted-d)}
+.ui-side span{padding:7px 10px;border-radius:8px}
+.ui-side span.on{background:rgba(74,114,255,.16);color:#fff}
+.ui-cnt{display:grid;gap:12px;align-content:start;min-width:0}
+.ui-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.ui-h b{font-size:1rem;font-weight:600}
+.ui-h small{font:500 .7rem var(--mono);color:var(--muted-d)}
+.prog{height:6px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.prog i{display:block;height:100%;width:83%;border-radius:99px;background:linear-gradient(90deg,var(--brand),var(--brand-2))}
+.docs{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.docs li{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:9px;background:rgba(255,255,255,.035);font-size:.8rem}
+.st{font:500 .66rem var(--mono);padding:3px 7px;border-radius:6px;white-space:nowrap}
+.st.ok{background:rgba(69,211,154,.14);color:var(--mint)}
+.st.wait{background:rgba(255,181,71,.14);color:var(--amber)}
+.st.info{background:rgba(74,114,255,.18);color:var(--brand-2)}
+.float{padding:14px 16px;font-size:.82rem;width:250px}
+.float .k{font:500 .66rem var(--mono);color:var(--muted-d);letter-spacing:.06em;text-transform:uppercase}
+.float b{display:block;font-size:.95rem;margin-top:4px;font-weight:600}
+.float p{color:var(--muted-d);margin-top:4px;font-size:.78rem}
+.f1{right:-2%;top:2%;transform:translateZ(90px)}
+.f2{left:-6%;bottom:6%;transform:translateZ(130px)}
+.f3{right:0;bottom:-2%;transform:translateZ(60px);width:230px}
+.meter3{display:flex;gap:4px;margin-top:8px}.meter3 i{flex:1;height:6px;border-radius:9px;background:rgba(255,255,255,.1)}.meter3 i.on{background:var(--amber)}
+.ico{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:rgba(74,114,255,.18);color:var(--brand-2);flex:none}
+.row{display:flex;gap:12px;align-items:flex-start}
+
+/* faixa de serviços correndo */
+.marquee{border-block:1px solid var(--line-d);overflow:hidden;padding-block:20px;background:var(--ink)}
+.marquee-track{display:flex;gap:44px;width:max-content;animation:mq 40s linear infinite}
+.marquee span{display:flex;align-items:center;gap:44px;color:rgba(255,255,255,.55);font-size:1rem;white-space:nowrap}
+.marquee span::after{content:"✦";color:var(--brand-2);font-size:.7rem}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* caminhos */
+.paths{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.path{position:relative;display:flex;flex-direction:column;gap:14px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px;min-height:260px;cursor:pointer;overflow:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,border-color .35s ease}
+.path:hover{transform:translateY(-4px);box-shadow:0 24px 50px -30px rgba(14,19,32,.45);border-color:#cfcabd}
+.path .n{font:500 .72rem var(--mono);color:var(--muted)}
+.path h3{font-size:1.45rem;letter-spacing:-.03em}
+.path p{color:var(--muted);font-size:.93rem}
+.path .go{margin-top:auto;display:flex;align-items:center;justify-content:space-between;font-weight:600;font-size:.92rem}
+.path .go i{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--paper);transition:background .3s ease,color .3s ease}
+.path:hover .go i{background:var(--ink);color:#fff}
+.path.feat{background:var(--ink);color:#fff;border-color:var(--ink)}
+.path.feat p,.path.feat .n{color:var(--muted-d)}
+.path.feat .go i{background:var(--brand);color:#fff}
+.path .tag{position:absolute;top:20px;right:20px;font:500 .66rem var(--mono);letter-spacing:.06em;text-transform:uppercase;background:var(--amber);color:#2a1b00;padding:4px 8px;border-radius:6px}
+
+/* serviços (bento) */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.tile{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px;overflow:hidden;display:flex;flex-direction:column;gap:12px;min-width:0}
+.tile h3{font-size:1.3rem;letter-spacing:-.025em}
+.tile p{color:var(--muted);font-size:.94rem}
+.tile ul{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:6px;font-size:.9rem}
+.tile li{display:flex;gap:8px}
+.tile li::before{content:"";flex:none;width:5px;height:5px;margin-top:.62em;border-radius:2px;background:var(--brand)}
+.t-a{grid-column:span 4}.t-b{grid-column:span 2}.t-c{grid-column:span 2}.t-d{grid-column:span 2}.t-e{grid-column:span 2}.t-f{grid-column:span 6}
+.tile.ink{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tile.ink p{color:var(--muted-d)}
+.tile .viz{margin-top:auto;padding-top:10px}
+.mini-bars{display:flex;align-items:flex-end;gap:8px;height:120px}
+.mini-bars i{flex:1;border-radius:8px 8px 3px 3px;background:var(--paper-2);position:relative}
+.mini-bars i.hl{background:var(--brand)}
+.mini-bars i span{position:absolute;bottom:-22px;left:0;right:0;text-align:center;font:500 .66rem var(--mono);color:var(--muted)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--paper);border:1px solid var(--line);font-size:.84rem;font-weight:500}
+.ink .chip{background:rgba(255,255,255,.06);border-color:var(--line-d);color:#dfe5f2}
+
+/* produto */
+.prod{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:center}
+.tabs{display:grid;gap:6px;margin-top:32px}
+.tab{display:grid;grid-template-columns:36px 1fr;gap:14px;text-align:left;padding:16px;border-radius:14px;border:0;background:transparent;cursor:pointer;color:var(--muted-d);transition:background .3s ease,color .3s ease}
+.tab b{display:block;color:#fff;font-weight:600;font-size:1rem}
+.tab small{display:block;font-size:.88rem;margin-top:2px}
+.tab .ico{width:36px;height:36px}
+.tab[aria-selected="true"]{background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px var(--line-d)}
+.tab[aria-selected="true"] .ico{background:var(--brand);color:#fff}
+.screen{position:relative;border-radius:22px;padding:10px;background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.02));box-shadow:0 40px 120px -40px rgba(74,114,255,.5);min-width:0}
+.screen-in{border-radius:14px;background:var(--ink-2);box-shadow:inset 0 0 0 1px var(--line-d);overflow:hidden}
+.scr-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line-d)}
+.scr-top .ui-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.panel{padding:22px;min-height:420px;display:none}
+.panel.on{display:block;animation:pin .5s cubic-bezier(.2,.7,.2,1)}
+@keyframes pin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.p-h{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.p-h h4{font-size:1.2rem;color:#fff}
+.p-h small{font:500 .72rem var(--mono);color:var(--muted-d)}
+.tbl{width:100%;border-collapse:collapse;font-size:.86rem;color:#dfe5f2}
+.tbl td{padding:11px 8px;border-bottom:1px solid var(--line-d);vertical-align:middle}
+.tbl td:last-child{text-align:right}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .sub{display:block;color:var(--muted-d);font-size:.76rem}
+.note{margin-top:16px;display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:12px;background:rgba(74,114,255,.1);color:#cfd9ff;font-size:.84rem}
+.cal{display:grid;gap:8px}
+.cal-i{display:grid;grid-template-columns:62px 1fr auto;gap:14px;align-items:center;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.035)}
+.cal-d{font:600 1.5rem/1 var(--sans);letter-spacing:-.03em;color:#fff}
+.cal-d small{display:block;font:500 .64rem var(--mono);color:var(--muted-d);letter-spacing:.08em;margin-top:4px;text-transform:uppercase}
+.cal-i b{color:#fff;font-weight:600;font-size:.92rem}
+.cal-i p{color:var(--muted-d);font-size:.78rem}
+.bars{display:grid;grid-template-columns:repeat(6,1fr);align-items:end;gap:12px;height:210px;padding:10px 4px 0;border-bottom:1px solid var(--line-d)}
+.bars div{display:grid;gap:4px;align-items:end;height:100%;grid-template-rows:1fr auto}
+.bars .b{display:flex;gap:4px;align-items:flex-end;height:100%}
+.bars .b i{flex:1;border-radius:6px 6px 2px 2px;background:var(--brand);transform-origin:bottom}
+.bars .b i+i{background:rgba(255,255,255,.18)}
+.bars span{font:500 .66rem var(--mono);color:var(--muted-d);text-align:center;padding-top:6px}
+.legend{display:flex;gap:16px;margin-top:12px;font-size:.76rem;color:var(--muted-d)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.kpi{padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.035)}
+.kpi small{display:block;font:500 .66rem var(--mono);color:var(--muted-d);text-transform:uppercase;letter-spacing:.06em}
+.kpi b{display:block;font-size:1.15rem;color:#fff;margin-top:4px;font-variant-numeric:tabular-nums;font-weight:600}
+.ex{font:500 .66rem var(--mono);color:var(--amber);letter-spacing:.06em;text-transform:uppercase}
+
+/* reforma */
+.ref-wrap{position:relative;overflow:hidden}
+.ref-top{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end;margin-bottom:56px}
+.tl-outer{overflow:hidden}
+.tl{display:flex;gap:18px;width:max-content;padding-bottom:6px}
+.yr{position:relative;width:min(420px,78vw);flex:none;border-radius:var(--r);padding:28px;background:var(--ink-2);box-shadow:inset 0 0 0 1px var(--line-d);display:flex;flex-direction:column;gap:14px;min-height:330px}
+.yr .y{font:600 clamp(3rem,6vw,4.6rem)/1 var(--sans);letter-spacing:-.05em;color:#fff}
+.yr .y small{font-size:.4em;letter-spacing:-.02em;color:var(--muted-d)}
+.yr h3{font-size:1.25rem;color:#fff}
+.yr p{color:var(--muted-d);font-size:.94rem}
+.yr.now{background:linear-gradient(160deg,#2547c9,#14266e);box-shadow:none}
+.yr.now p{color:#d6defa}
+.yr .badge{position:absolute;top:24px;right:24px;font:500 .66rem var(--mono);letter-spacing:.08em;text-transform:uppercase;background:var(--amber);color:#2a1b00;padding:4px 8px;border-radius:6px}
+.yr.cta{background:var(--paper);color:var(--text);justify-content:space-between}
+.yr.cta h3{color:var(--text);font-size:1.6rem}
+.yr.cta p{color:var(--muted)}
+.ref-plan{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:56px}
+.rp{padding:22px;border-radius:var(--r);background:rgba(255,255,255,.03);box-shadow:inset 0 0 0 1px var(--line-d);display:grid;gap:8px;align-content:start}
+.rp .n{font:500 .72rem var(--mono);color:var(--brand-2)}
+.rp b{font-size:1.02rem;font-weight:600;color:#fff}
+.rp p{color:var(--muted-d);font-size:.88rem}
+
+/* ferramentas */
+.tools{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:14px}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.tool h3{font-size:1.35rem;letter-spacing:-.025em}
+.tool p{color:var(--muted);font-size:.93rem}
+.tool.feat{background:linear-gradient(165deg,#fff 0%,#eef2ff 100%);border-color:#d8dffb}
+.agenda{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.agenda li{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line)}
+.agenda li:last-child{border-bottom:0}
+.agenda .d{font:600 1.15rem var(--sans);letter-spacing:-.03em;text-align:center;background:var(--paper);border-radius:10px;padding:6px 0}
+.agenda .d small{display:block;font:500 .58rem var(--mono);color:var(--muted);letter-spacing:.08em}
+.agenda b{font-size:.9rem;font-weight:600}
+.agenda span{display:block;font-size:.78rem;color:var(--muted)}
+.check{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:9px 10px;border-radius:10px;cursor:pointer;font-size:.9rem}
+.check label:hover{background:var(--paper)}
+.check input{accent-color:var(--brand);width:18px;height:18px;margin-top:2px;flex:none}
+.check input:checked + span{color:var(--muted);text-decoration:line-through}
+.check-count{font:500 .76rem var(--mono);color:var(--muted)}
+.small-note{font-size:.78rem;color:var(--muted)}
+
+/* planos */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:stretch}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px;display:flex;flex-direction:column;gap:18px}
+.plan .for{font-size:.88rem;color:var(--muted)}
+.plan h3{font-size:1.7rem;letter-spacing:-.035em}
+.plan .price{font-size:1rem;font-weight:600;padding:12px 14px;border-radius:12px;background:var(--paper)}
+.plan .price small{display:block;font-weight:400;color:var(--muted);font-size:.82rem}
+.plan h4{font:500 .7rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.plan ul{margin:0;padding:0;list-style:none;display:grid;gap:9px;font-size:.92rem}
+.plan li{display:grid;grid-template-columns:18px 1fr;gap:10px}
+.plan li svg{margin-top:3px}
+.plan .yes svg{color:var(--brand)}
+.plan .extra li{color:var(--muted)}
+.plan .extra svg{color:var(--muted)}
+.plan .btn{margin-top:auto}
+.plan.pop{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 40px 80px -40px rgba(14,19,32,.6)}
+.plan.pop .for,.plan.pop h4,.plan.pop .extra li{color:var(--muted-d)}
+.plan.pop .price{background:rgba(255,255,255,.06)}
+.plan.pop .price small{color:var(--muted-d)}
+.plan.pop .yes svg{color:var(--brand-2)}
+.plan .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.plan .badge{font:500 .66rem var(--mono);letter-spacing:.08em;text-transform:uppercase;background:var(--amber);color:#2a1b00;padding:4px 8px;border-radius:6px}
+.scope{margin-top:18px;display:flex;gap:12px;align-items:flex-start;padding:16px 18px;border-radius:14px;border:1px dashed #cfcabd;color:var(--muted);font-size:.9rem}
+
+/* troca */
+.switch{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:56px 1fr;gap:18px;padding:22px 0;border-top:1px solid var(--line)}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps li::before{content:"0" counter(s);font:500 .9rem var(--mono);color:var(--brand);padding-top:3px}
+.steps b{display:block;font-size:1.12rem;font-weight:600;letter-spacing:-.02em}
+.steps p{color:var(--muted);font-size:.94rem;margin-top:4px}
+.switch-card{position:sticky;top:110px;background:var(--ink);color:#fff;border-radius:22px;padding:30px;display:grid;gap:16px}
+.switch-card p{color:var(--muted-d)}
+.why{display:grid;gap:8px;margin:6px 0 4px;padding:0;list-style:none}
+.why li{display:flex;gap:10px;align-items:center;font-size:.94rem;color:#dfe5f2}
+.why li::before{content:"";width:18px;height:18px;flex:none;border-radius:50%;background:rgba(255,122,107,.16) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff7a6b' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M7 7l10 10M17 7L7 17'/%3E%3C/svg%3E") center/10px no-repeat}
+
+/* segmentos */
+.segs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.seg{background:var(--paper);padding:26px;display:grid;gap:8px;align-content:start;transition:background .3s ease}
+.seg:hover{background:var(--card)}
+.seg b{font-size:1.12rem;font-weight:600;letter-spacing:-.02em}
+.seg p{color:var(--muted);font-size:.9rem}
+
+/* perguntas */
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+.faq details{border-top:1px solid var(--line)}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:22px 0;font-size:1.1rem;font-weight:600;letter-spacing:-.015em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{flex:none;width:32px;height:32px;border-radius:50%;background:var(--paper-2);display:grid;place-items:center;transition:transform .3s ease,background .3s ease}
+.faq details[open] summary i{transform:rotate(45deg);background:var(--ink);color:#fff}
+.faq .ans{padding:0 48px 22px 0;color:var(--muted);display:grid;gap:10px}
+
+/* contato final */
+.final{position:relative;overflow:hidden;isolation:isolate}
+.final .glow.a{left:auto;right:-200px;top:-200px}
+.final-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.final h2{font-size:clamp(2.4rem,5.6vw,4.4rem)}
+.form{background:var(--ink-2);border-radius:22px;padding:28px;box-shadow:inset 0 0 0 1px var(--line-d);display:grid;gap:14px}
+.form label{font-size:.84rem;font-weight:500;color:var(--muted-d);display:grid;gap:6px}
+.form input,.form select,.form textarea,.fl-form input{width:100%;font:inherit;font-size:1rem;color:#fff;background:rgba(255,255,255,.05);border:1px solid var(--line-d);border-radius:12px;padding:12px 14px}
+.form select option{color:#000}
+.form textarea{min-height:96px;resize:vertical}
+.form input:focus,.form select:focus,.form textarea:focus,.fl-form input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(74,114,255,.25)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form small{color:var(--muted-d);font-size:.8rem}
+
+footer.foot{background:var(--ink);color:var(--muted-d);border-top:1px solid var(--line-d);padding-block:56px 40px;font-size:.9rem}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+.foot h5{margin:0 0 12px;font:500 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.foot a{text-decoration:none}.foot a:hover{color:#fff}
+.foot-base{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:48px;padding-top:24px;border-top:1px solid var(--line-d);font-size:.82rem}
+.big-word{font:600 clamp(4rem,17vw,15rem)/.8 var(--sans);letter-spacing:-.06em;color:rgba(255,255,255,.04);margin-top:40px;white-space:nowrap;overflow:hidden;user-select:none}
+
+/* WhatsApp flutuante */
+.wa-fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#25d366;color:#fff;box-shadow:0 14px 34px -10px rgba(37,211,102,.7);border:0;cursor:pointer;transition:transform .25s ease}
+.wa-fab:hover{transform:scale(1.06)}
+
+/* fluxo (modal) */
+.fl{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:16px}
+.fl[hidden]{display:none!important}
+.fl-bg{position:absolute;inset:0;background:rgba(6,8,13,.66);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:fade .3s ease}
+.fl-box{position:relative;width:min(560px,100%);max-height:calc(100svh - 32px);overflow:auto;overscroll-behavior:contain;background:var(--paper);color:var(--text);border-radius:24px;box-shadow:0 40px 120px -20px rgba(0,0,0,.6);animation:pop .4s cubic-bezier(.2,.8,.2,1)}
+@keyframes fade{from{opacity:0}}
+@keyframes pop{from{opacity:0;transform:translateY(20px) scale(.98)}}
+.fl-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;background:var(--paper);border-bottom:1px solid var(--line)}
+.fl-head b{font-size:.95rem;font-weight:600}
+.fl-x{width:38px;height:38px;border-radius:50%;border:0;background:var(--paper-2);cursor:pointer;font-size:1.2rem;line-height:1}
+.fl-bar{height:4px;background:var(--paper-2)}
+.fl-bar i{display:block;height:100%;width:0;background:var(--brand);transition:width .35s ease}
+.fl-body{padding:24px 22px 26px}
+.fl-step small.c{font:500 .72rem var(--mono);color:var(--muted);letter-spacing:.06em}
+.fl-step h3{font-size:clamp(1.4rem,4.4vw,1.75rem);letter-spacing:-.03em;margin-top:8px}
+.fl-step .help{color:var(--muted);margin-top:8px;font-size:.94rem}
+.opts{display:grid;gap:8px;margin-top:20px}
+.opt{display:flex;flex-direction:column;gap:2px;text-align:left;width:100%;padding:14px 16px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);cursor:pointer;font-weight:600;transition:border-color .2s ease,background .2s ease,transform .2s ease}
+.opt small{font-weight:400;color:var(--muted);font-size:.86rem}
+.opt:hover{border-color:var(--brand)}
+.opt[aria-pressed="true"]{border-color:var(--brand);background:#eef2ff}
+.fl-nav{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.linkb{background:none;border:0;padding:8px 0;color:var(--muted);cursor:pointer;text-decoration:underline;text-underline-offset:3px;font-size:.92rem}
+.fl-form{display:grid;gap:12px;margin-top:18px}
+.fl-form label{display:grid;gap:6px;font-size:.84rem;font-weight:500;color:var(--muted)}
+.fl-form input{color:var(--text);background:var(--card);border-color:var(--line)}
+.preview{margin-top:6px;border-radius:14px;background:#e7f6ec;border:1px solid #c9ead4;padding:12px 14px;font-size:.84rem;white-space:pre-wrap;color:#183a25;font-family:var(--sans)}
+.preview-l{font:500 .68rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.res-lv{display:grid;gap:10px;padding:18px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.res-lv h3{font-size:1.5rem;margin:0}
+.res-lv h3 b{color:var(--lv)}
+.res-m{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.res-m i{height:8px;border-radius:9px;background:var(--paper-2)}.res-m i.on{background:var(--lv)}
+.res-ml{display:flex;justify-content:space-between;font:500 .68rem var(--mono);color:var(--muted)}
+.res-sec{margin-top:18px}
+.res-sec h4{font-size:1rem;margin-bottom:10px;letter-spacing:-.01em}
+.res-pts{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:.92rem}
+.res-pts li{display:grid;grid-template-columns:8px 1fr;gap:10px}
+.res-pts li::before{content:"";width:8px;height:8px;border-radius:2px;margin-top:.5em;background:var(--brand)}
+.res-pts li.a::before{background:var(--rose)}
+.res-todo{margin:0;padding:0 0 0 20px;display:grid;gap:6px;font-size:.92rem}
+.res-disc{margin-top:14px;font-size:.76rem;color:var(--muted)}
+
+/* aparecimento ao rolar (só quando o JS liga) */
+.js .rv{opacity:0;transform:translateY(28px)}
+
+/* responsivo */
+@media (max-width:1080px){
+  .nav-links{display:none}
+  .paths{grid-template-columns:repeat(2,1fr)}
+  .tools{grid-template-columns:1fr 1fr}.tools .feat{grid-column:span 2}
+  .ref-plan{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;min-height:0;padding-block:40px 40px;gap:28px}
+  .stage{height:430px}
+  .prod,.ref-top,.switch,.faq-grid,.final-grid,.split{grid-template-columns:1fr;gap:32px}
+  .bento{grid-template-columns:1fr 1fr}
+  .t-a,.t-f{grid-column:span 2}.t-b,.t-c,.t-d,.t-e{grid-column:span 1}
+  .plans{grid-template-columns:1fr}
+  .segs{grid-template-columns:1fr 1fr}
+  .switch-card{position:static}
+  .nav-cta .btn-g{display:none}
+  .burger{display:block}
+  .mnav{display:block;position:fixed;inset:72px 0 auto 0;z-index:49;background:rgba(10,13,20,.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:12px 20px 24px;border-bottom:1px solid var(--line-d);transform:translateY(-12px);opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease}
+  .nav.open + .mnav{opacity:1;transform:none;pointer-events:auto}
+  .mnav a{display:block;padding:14px 4px;color:#fff;text-decoration:none;font-size:1.1rem;border-bottom:1px solid var(--line-d)}
+  .tl{flex-direction:column;width:auto}
+  .yr{width:auto;min-height:0}
+}
+@media (max-width:620px){
+  .wrap{padding-inline:16px}
+  .paths,.bento,.tools,.segs,.ref-plan,.two{grid-template-columns:1fr}
+  .t-a,.t-b,.t-c,.t-d,.t-e,.t-f,.tools .feat{grid-column:auto}
+  .path{min-height:0}
+  .stage{height:auto;perspective:none;padding-top:34px}
+  .stage-inner{position:relative;inset:auto;transform:none!important}
+  .ui-main{position:relative;left:0;top:0;width:100%;height:auto;padding:14px}
+  .ui-body{grid-template-columns:1fr;height:auto}.ui-side{display:none}
+  .f1{right:-6px;top:-34px;width:200px;padding:10px 12px}
+  .f2{position:relative;left:auto;bottom:auto;width:auto;margin-top:12px}
+  .f1,.f2{transform:none}
+  .f3{display:none}
+  .ui-main .ui-title{display:none}
+  .hero-ctas .btn{flex:1 1 100%}
+  .kpis{grid-template-columns:1fr 1fr}.kpis .kpi:last-child{grid-column:span 2}
+  .panel{padding:16px;min-height:0}
+  .cal-i{grid-template-columns:52px 1fr}.cal-i .st{grid-column:2;justify-self:start}
+  .faq .ans{padding-right:0}
+  .nav-cta .btn-p{display:none}
+  .nav .wrap{height:64px}
+  .hero{margin-top:-64px;padding-top:64px}
+  .mnav{top:64px}
+  .foot-grid{grid-template-columns:1fr}
+  .tbl td{padding:10px 4px}
+  .split{gap:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .js .rv{opacity:1;transform:none}
+}
+
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z M14 3v5h5 M10 13h6M10 17h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><path d="M4 6h16v14H4z M4 10h16 M8 3v5 M16 3v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16 M7 16v-5 M12 16V7 M17 16v-8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l2 2H4z M10 21h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7c.1.2 1.9 2.9 4.6 4 1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.2Z"/></symbol>
+  </defs>
+</svg>
+
+<div class="demo-strip" id="demoStrip"><b>Demonstração com marca fictícia.</b> O site do seu escritório sai com o seu nome, suas cores e o seu WhatsApp. <button type="button" aria-label="Fechar aviso" id="demoX">×</button></div>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Lumen Contabilidade, início">
+      <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#4a72ff"/><path d="M10 8v16h12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="21.5" cy="10.5" r="2.5" fill="#ffb547"/></svg>
+      Lumen Contabilidade
+    </a>
+    <ul class="nav-links">
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#portal">Portal do cliente</a></li>
+      <li><a href="#reforma">Reforma 2026</a></li>
+      <li><a href="#planos">Planos</a></li>
+      <li><a href="#troca">Trocar de contador</a></li>
+    </ul>
+    <div class="nav-cta">
+      <button class="btn btn-g btn-s" type="button" data-flow="cliente">Área do cliente</button>
+      <button class="btn btn-p btn-s" type="button" data-flow="contato">Falar com um contador</button>
+      <button class="burger" type="button" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu">
+  <a href="#servicos">Serviços</a>
+  <a href="#portal">Portal do cliente</a>
+  <a href="#reforma">Reforma 2026</a>
+  <a href="#planos">Planos</a>
+  <a href="#troca">Trocar de contador</a>
+  <a href="#" data-flow="cliente">Área do cliente</a>
+</nav>
+
+<main id="inicio">
+  <!-- HERO -->
+  <section class="hero dark">
+    <canvas id="field" aria-hidden="true"></canvas>
+    <div class="glow a"></div><div class="glow b"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <a class="pill" href="#reforma"><b>2026</b> Notas fiscais já com CBS e IBS. Sua empresa está pronta?</a>
+        <h1 class="split-h">Sua contabilidade <em class="s">um passo à frente</em> do prazo.</h1>
+        <p class="lede">Impostos, folha e obrigações em dia. Documentos e guias num só lugar. E um contador que explica, em português claro, o que cada mudança significa para a sua empresa.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-p" type="button" data-flow="contato">Falar com um contador <svg width="18" height="18" class="arr"><use href="#i-arr"/></svg></button>
+          <button class="btn btn-g" type="button" data-flow="diagnostico">Diagnóstico da reforma</button>
+        </div>
+        <ul class="assure">
+          <li><svg width="16" height="16"><use href="#i-check"/></svg>Proposta com escopo por escrito</li>
+          <li><svg width="16" height="16"><use href="#i-check"/></svg>Troca de contador conduzida por nós</li>
+          <li><svg width="16" height="16"><use href="#i-check"/></svg>Atendimento 100% digital</li>
+        </ul>
+      </div>
+
+      <div class="stage" id="stage" aria-label="Exemplo do portal do cliente">
+        <div class="stage-inner" id="stageInner">
+          <div class="ui ui-main">
+            <div class="ui-bar"><div class="dots"><i></i><i></i><i></i></div><span class="ui-title">portal · Souza Eng. (exemplo)</span><span class="st ok">em dia</span></div>
+            <div class="ui-body">
+              <div class="ui-side"><span class="on">Documentos</span><span>Guias</span><span>Agenda</span><span>Relatórios</span><span>Solicitações</span></div>
+              <div class="ui-cnt">
+                <div class="ui-h"><b>Documentos de <span data-month>outubro</span></b><small>5 de 6 recebidos</small></div>
+                <div class="prog"><i></i></div>
+                <ul class="docs">
+                  <li>Extratos bancários<span class="st ok">recebido</span></li>
+                  <li>Notas de entrada (XML)<span class="st ok">recebido</span></li>
+                  <li>Ponto e horas extras<span class="st ok">recebido</span></li>
+                  <li>Comprovantes de despesas<span class="st ok">recebido</span></li>
+                  <li>Contrato do novo funcionário<span class="st wait">lembrete enviado</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="ui float f1"><div class="row"><span class="ico"><svg width="16" height="16"><use href="#i-doc"/></svg></span><div><span class="k">Guia disponível</span><b>DAS de <span data-month-prev>setembro</span></b><p>Vence dia 20 · pronta para pagar</p></div></div></div>
+          <div class="ui float f2"><div class="row"><span class="ico"><svg width="16" height="16"><use href="#i-shield"/></svg></span><div><span class="k">Reforma tributária</span><b>Nível de atenção: médio</b><p>3 pontos para revisar este ano</p><div class="meter3"><i class="on"></i><i class="on"></i><i></i></div></div></div></div>
+          <div class="ui float f3"><div class="row"><span class="ico"><svg width="16" height="16"><use href="#i-chat"/></svg></span><div><span class="k">Seu contador</span><b>Apuração pronta</b><p>Resumo do mês disponível no portal.</p></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-track" id="mq"><span>Simples Nacional</span><span>Lucro Presumido</span><span>Lucro Real</span><span>MEI</span><span>Folha e eSocial</span><span>FGTS Digital</span><span>Planejamento tributário</span><span>CBS e IBS</span><span>BPO financeiro</span><span>Abertura de empresa</span></div></div>
+
+  <!-- CAMINHOS -->
+  <section class="sec" id="caminhos">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">Por onde começar</span>
+        <h2 class="h2">Cada empresa chega de um jeito. <em class="s">Escolha o seu.</em></h2>
+        <p class="lede">Responda algumas perguntas rápidas e o contador certo já recebe o seu caso explicado. Sem formulário longo, sem ligação de vendas.</p>
+      </div>
+      <div class="paths">
+        <button class="path rv" type="button" data-flow="abrir"><span class="n">01</span><h3>Quero abrir minha empresa</h3><p>Escolha de atividade, regime e porte certos desde o primeiro dia, para não pagar imposto a mais.</p><span class="go">Começar <i><svg width="16" height="16"><use href="#i-arr"/></svg></i></span></button>
+        <button class="path feat rv" type="button" data-flow="trocar"><span class="n">02</span><h3>Quero trocar de contador</h3><p>A gente conduz a transição, fala com o escritório anterior e revisa o que ficou pendente.</p><span class="go">Começar <i><svg width="16" height="16"><use href="#i-arr"/></svg></i></span></button>
+        <button class="path rv" type="button" data-flow="mei"><span class="n">03</span><h3>Sou MEI e cresci</h3><p>Passou do limite, quer contratar ou ter sócio? Mudamos o enquadramento sem susto.</p><span class="go">Começar <i><svg width="16" height="16"><use href="#i-arr"/></svg></i></span></button>
+        <button class="path rv" type="button" data-flow="cliente"><span class="n">04</span><h3>Já sou cliente</h3><p>Envie documentos, peça a segunda via de uma guia ou fale direto com o seu contador.</p><span class="go">Acessar <i><svg width="16" height="16"><use href="#i-arr"/></svg></i></span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="sec" id="servicos" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">O que fazemos</span>
+        <h2 class="h2">Toda a rotina contábil, <em class="s">e a cabeça livre</em> para o seu negócio.</h2>
+      </div>
+      <div class="bento">
+        <article class="tile t-a rv">
+          <div class="split">
+            <div style="display:grid;gap:12px">
+              <h3>Contabilidade e fiscal</h3>
+              <p>Apuração de impostos, escrituração e obrigações acessórias entregues antes do prazo, com um resumo mensal que você entende.</p>
+              <ul><li>Apuração do Simples, Presumido e Real</li><li>Obrigações federais, estaduais e municipais</li><li>Balanço e DRE com explicação do contador</li></ul>
+            </div>
+            <div class="viz" aria-hidden="true">
+              <div class="mini-bars"><i style="height:42%"><span>mai</span></i><i style="height:55%"><span>jun</span></i><i style="height:48%"><span>jul</span></i><i style="height:66%"><span>ago</span></i><i style="height:72%"><span>set</span></i><i class="hl" style="height:88%"><span>out</span></i></div>
+            </div>
+          </div>
+        </article>
+        <article class="tile t-b ink rv">
+          <h3>Planejamento tributário</h3>
+          <p>Revisamos o seu regime todo ano e simulamos cenários antes de você decidir. Pagar menos imposto, dentro da lei.</p>
+          <div class="viz chip-row"><span class="chip">Simples</span><span class="chip">Presumido</span><span class="chip">Real</span></div>
+        </article>
+        <article class="tile t-c rv">
+          <h3>Folha e eSocial</h3>
+          <p>Admissões, férias, rescisões, pró-labore, FGTS Digital e eSocial. Tudo calculado e conferido.</p>
+        </article>
+        <article class="tile t-d rv">
+          <h3>BPO financeiro</h3>
+          <p>Contas a pagar e a receber, conciliação bancária e fluxo de caixa organizados para você decidir com números.</p>
+        </article>
+        <article class="tile t-e rv">
+          <h3>Abertura e legalização</h3>
+          <p>Contrato social, CNPJ, inscrições e licenças. Do zero até a primeira nota fiscal emitida.</p>
+        </article>
+        <article class="tile t-f ink rv">
+          <div class="split">
+            <div style="display:grid;gap:12px">
+              <span class="eyebrow">Novo</span>
+              <h3>Consultoria para a reforma tributária</h3>
+              <p>Revisão do cadastro fiscal dos seus produtos e serviços, simulação de preço com CBS e IBS, revisão de contratos e a escolha de regime para 2027.</p>
+            </div>
+            <div class="chip-row" style="justify-content:flex-end"><span class="chip">Cadastro fiscal</span><span class="chip">Preço com CBS e IBS</span><span class="chip">Contratos</span><span class="chip">Regime 2027</span><button class="btn btn-w btn-s" type="button" data-flow="diagnostico">Fazer diagnóstico grátis</button></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTAL -->
+  <section class="sec dark" id="portal">
+    <div class="wrap prod">
+      <div class="rv">
+        <span class="eyebrow">Portal do cliente</span>
+        <h2 class="h2" style="margin-top:18px">Seu escritório contábil, <em class="s">no bolso.</em></h2>
+        <p class="lede" style="margin-top:18px">Documentos, guias, prazos e relatórios num só lugar. Você recebe aviso antes do vencimento, e a gente cobra o que falta sem você precisar lembrar.</p>
+        <div class="tabs" role="tablist" aria-label="Partes do portal">
+          <button class="tab" role="tab" id="tb-docs" aria-controls="pn-docs" aria-selected="true"><span class="ico"><svg width="18" height="18"><use href="#i-doc"/></svg></span><span><b>Documentos do mês</b><small>Lista do que falta, com lembrete automático.</small></span></button>
+          <button class="tab" role="tab" id="tb-agenda" aria-controls="pn-agenda" aria-selected="false" tabindex="-1"><span class="ico"><svg width="18" height="18"><use href="#i-cal"/></svg></span><span><b>Agenda de vencimentos</b><small>Cada guia aparece antes do prazo.</small></span></button>
+          <button class="tab" role="tab" id="tb-rel" aria-controls="pn-rel" aria-selected="false" tabindex="-1"><span class="ico"><svg width="18" height="18"><use href="#i-chart"/></svg></span><span><b>Relatórios claros</b><small>Faturamento, despesas e impostos do mês.</small></span></button>
+          <button class="tab" role="tab" id="tb-sol" aria-controls="pn-sol" aria-selected="false" tabindex="-1"><span class="ico"><svg width="18" height="18"><use href="#i-chat"/></svg></span><span><b>Solicitações com prazo</b><small>Cada pedido tem responsável e status.</small></span></button>
+        </div>
+      </div>
+
+      <div class="screen rv" aria-live="polite">
+        <div class="screen-in">
+          <div class="scr-top"><div class="dots"><i></i><i></i><i></i></div><span class="ui-title">portal · Souza Engenharia (exemplo)</span><span class="ex">dados de exemplo</span></div>
+
+          <div class="panel on" id="pn-docs" role="tabpanel" aria-labelledby="tb-docs">
+            <div class="p-h"><h4>Documentos de <span data-month>outubro</span></h4><small>5 de 6 recebidos</small></div>
+            <div class="prog" style="margin-bottom:14px"><i></i></div>
+            <table class="tbl"><tbody>
+              <tr><td>Extratos bancários<span class="sub">Conta corrente e aplicação</span></td><td><span class="st ok">recebido</span></td></tr>
+              <tr><td>Notas fiscais de entrada<span class="sub">Arquivos XML</span></td><td><span class="st ok">recebido</span></td></tr>
+              <tr><td>Ponto e horas extras<span class="sub">Para a folha do mês</span></td><td><span class="st ok">recebido</span></td></tr>
+              <tr><td>Comprovantes de despesas<span class="sub">Recibos e boletos pagos</span></td><td><span class="st ok">recebido</span></td></tr>
+              <tr><td>Notas de serviço emitidas<span class="sub">Puxadas automaticamente</span></td><td><span class="st ok">recebido</span></td></tr>
+              <tr><td>Contrato do novo funcionário<span class="sub">Admissão</span></td><td><span class="st wait">lembrete enviado</span></td></tr>
+            </tbody></table>
+            <div class="note"><svg width="18" height="18" style="flex:none"><use href="#i-bell"/></svg><span>Faltando algo, o portal avisa você no WhatsApp. Ninguém precisa ficar cobrando.</span></div>
+          </div>
+
+          <div class="panel" id="pn-agenda" role="tabpanel" aria-labelledby="tb-agenda" hidden>
+            <div class="p-h"><h4>Vencimentos de <span data-month>outubro</span></h4><small>guias calculadas e conferidas</small></div>
+            <div class="cal">
+              <div class="cal-i"><div class="cal-d">5º<small>dia útil</small></div><div><b>Salários</b><p>Pagamento da folha do mês anterior</p></div><span class="st ok">pago</span></div>
+              <div class="cal-i"><div class="cal-d">20<small>dia</small></div><div><b>DAS do Simples Nacional</b><p>Guia pronta no portal</p></div><span class="st info">disponível</span></div>
+              <div class="cal-i"><div class="cal-d">20<small>dia</small></div><div><b>FGTS Digital</b><p>Guia gerada a partir da folha</p></div><span class="st info">disponível</span></div>
+              <div class="cal-i"><div class="cal-d">20<small>dia</small></div><div><b>INSS e IRRF da folha</b><p>Guia da DCTFWeb</p></div><span class="st wait">em cálculo</span></div>
+            </div>
+            <div class="note"><svg width="18" height="18" style="flex:none"><use href="#i-bell"/></svg><span>Quando o vencimento cai em fim de semana ou feriado, a data já aparece ajustada no portal.</span></div>
+          </div>
+
+          <div class="panel" id="pn-rel" role="tabpanel" aria-labelledby="tb-rel" hidden>
+            <div class="p-h"><h4>Resumo do semestre</h4><small>valores de exemplo</small></div>
+            <div class="kpis">
+              <div class="kpi"><small>Faturamento</small><b>R$ 148,2 mil</b></div>
+              <div class="kpi"><small>Despesas</small><b>R$ 96,5 mil</b></div>
+              <div class="kpi"><small>Impostos</small><b>R$ 12,4 mil</b></div>
+            </div>
+            <div class="bars" aria-hidden="true">
+              <div><div class="b"><i style="height:52%"></i><i style="height:38%"></i></div><span>mai</span></div>
+              <div><div class="b"><i style="height:60%"></i><i style="height:41%"></i></div><span>jun</span></div>
+              <div><div class="b"><i style="height:55%"></i><i style="height:44%"></i></div><span>jul</span></div>
+              <div><div class="b"><i style="height:71%"></i><i style="height:46%"></i></div><span>ago</span></div>
+              <div><div class="b"><i style="height:78%"></i><i style="height:50%"></i></div><span>set</span></div>
+              <div><div class="b"><i style="height:90%"></i><i style="height:53%"></i></div><span>out</span></div>
+            </div>
+            <div class="legend"><span><i style="background:var(--brand)"></i>Faturamento</span><span><i style="background:rgba(255,255,255,.18)"></i>Despesas</span></div>
+          </div>
+
+          <div class="panel" id="pn-sol" role="tabpanel" aria-labelledby="tb-sol" hidden>
+            <div class="p-h"><h4>Suas solicitações</h4><small>cada pedido tem responsável</small></div>
+            <table class="tbl"><tbody>
+              <tr><td>Segunda via da guia do DAS<span class="sub">Fiscal</span></td><td><span class="st ok">concluída</span></td></tr>
+              <tr><td>Declaração de faturamento para o banco<span class="sub">Contábil</span></td><td><span class="st info">em andamento</span></td></tr>
+              <tr><td>Admissão de funcionário<span class="sub">Departamento pessoal</span></td><td><span class="st wait">aguardando documentos</span></td></tr>
+              <tr><td>Contratos e a reforma tributária<span class="sub">Consultoria</span></td><td><span class="st ok">respondida</span></td></tr>
+            </tbody></table>
+            <div class="note"><svg width="18" height="18" style="flex:none"><use href="#i-chat"/></svg><span>Nada se perde no meio de conversas de WhatsApp: cada pedido fica registrado até ser resolvido.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFORMA -->
+  <section class="sec dark ref-wrap" id="reforma" style="padding-top:0">
+    <div class="wrap">
+      <div class="ref-top">
+        <div class="rv">
+          <span class="eyebrow">Reforma tributária</span>
+          <h2 class="h2" style="margin-top:18px">A maior mudança de impostos em décadas. <em class="s">A gente traduz.</em></h2>
+        </div>
+        <p class="lede rv">PIS, Cofins, IPI, ICMS e ISS vão dar lugar à CBS, ao IBS e ao Imposto Seletivo. A troca acontece aos poucos, até 2033, e cada etapa pede uma ação diferente da sua empresa.</p>
+      </div>
+    </div>
+    <div class="tl-outer" id="tlOuter">
+      <div class="wrap">
+        <div class="tl" id="tl">
+          <article class="yr now"><span class="badge">agora</span><div class="y">2026</div><h3>Ano de teste</h3><p>As notas fiscais passam a trazer CBS de 0,9% e IBS de 0,1%. Para quem cumpre as regras, o valor é só informativo e não é cobrado a mais.</p></article>
+          <article class="yr"><div class="y">2027</div><h3>A CBS começa de verdade</h3><p>PIS e Cofins deixam de existir. O IPI fica zerado para quase todos os produtos e o Imposto Seletivo passa a valer. No Simples, abre-se a escolha de pagar CBS e IBS por fora.</p></article>
+          <article class="yr"><div class="y">2029<small>–2032</small></div><h3>Transição do ICMS e do ISS</h3><p>Ano a ano, ICMS e ISS diminuem e o IBS aumenta na mesma proporção.</p></article>
+          <article class="yr"><div class="y">2033</div><h3>Modelo novo completo</h3><p>ICMS e ISS deixam de existir. Ficam CBS, IBS e Imposto Seletivo.</p></article>
+          <article class="yr cta"><div style="display:grid;gap:12px"><span class="eyebrow" style="color:var(--muted)">Ferramenta grátis</span><h3>O que muda na sua empresa?</h3><p>7 perguntas, resultado na hora: nível de atenção, o que muda no seu caso e o que fazer agora.</p></div><button class="btn btn-p" type="button" data-flow="diagnostico">Fazer o diagnóstico <svg width="18" height="18" class="arr"><use href="#i-arr"/></svg></button></article>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="ref-plan">
+        <div class="rp rv"><span class="n">Etapa 1</span><b>Mapa de impacto</b><p>Como a reforma mexe no seu setor, regime e margem.</p></div>
+        <div class="rp rv"><span class="n">Etapa 2</span><b>Cadastro fiscal revisado</b><p>Produtos e serviços com a classificação certa para as notas novas.</p></div>
+        <div class="rp rv"><span class="n">Etapa 3</span><b>Preço e contratos</b><p>Simulação de preço com CBS e IBS e cláusulas de reajuste.</p></div>
+        <div class="rp rv"><span class="n">Etapa 4</span><b>Decisão de regime</b><p>Simples por dentro ou por fora, com números do seu caso.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FERRAMENTAS -->
+  <section class="sec" id="ferramentas">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">Ferramentas grátis</span>
+        <h2 class="h2">Use agora, <em class="s">sem cadastro.</em></h2>
+      </div>
+      <div class="tools">
+        <article class="tool feat rv">
+          <span class="eyebrow">2 minutos</span>
+          <h3>Diagnóstico da reforma tributária</h3>
+          <p>Descubra o seu nível de atenção, os pontos da reforma que pesam no seu caso e uma lista do que fazer agora.</p>
+          <div class="res-lv" style="--lv:var(--amber);margin-top:auto" aria-hidden="true">
+            <h3 style="font-size:1.1rem">Nível de atenção: <b>Médio</b></h3>
+            <div class="res-m"><i class="on"></i><i class="on"></i><i></i></div>
+            <div class="res-ml"><span>baixo</span><span>médio</span><span>alto</span></div>
+          </div>
+          <button class="btn btn-p" type="button" data-flow="diagnostico">Começar diagnóstico</button>
+        </article>
+        <article class="tool rv">
+          <span class="eyebrow">Agenda</span>
+          <h3>Vencimentos de <span data-month>outubro</span></h3>
+          <ul class="agenda">
+            <li><span class="d">5º<small>ÚTIL</small></span><div><b>Salários</b><span>Folha do mês anterior</span></div></li>
+            <li><span class="d">20<small>DIA</small></span><div><b>DAS do Simples e do MEI</b><span>Imposto do mês anterior</span></div></li>
+            <li><span class="d">20<small>DIA</small></span><div><b>FGTS Digital</b><span>Sobre a folha do mês anterior</span></div></li>
+            <li><span class="d">20<small>DIA</small></span><div><b>INSS e IRRF</b><span>Guia da DCTFWeb</span></div></li>
+          </ul>
+          <p class="small-note">Em fim de semana ou feriado a data pode mudar. Clientes recebem cada guia no portal antes do prazo.</p>
+        </article>
+        <article class="tool rv">
+          <span class="eyebrow">Checklist</span>
+          <h3>Documentos para abrir empresa</h3>
+          <ul class="check" id="checkAbrir">
+            <li><label><input type="checkbox" id="ck1"><span>RG, CPF e comprovante de endereço de cada sócio</span></label></li>
+            <li><label><input type="checkbox" id="ck2"><span>Endereço da sede com inscrição do IPTU</span></label></li>
+            <li><label><input type="checkbox" id="ck3"><span>Atividades que a empresa vai exercer</span></label></li>
+            <li><label><input type="checkbox" id="ck4"><span>Capital social e a parte de cada sócio</span></label></li>
+            <li><label><input type="checkbox" id="ck5"><span>Nome empresarial: duas ou três opções</span></label></li>
+          </ul>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto"><span class="check-count" id="ckCount">0 de 5 prontos</span><button class="btn btn-g btn-s" type="button" data-flow="abrir">Abrir com a gente</button></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section class="sec" id="planos" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">Planos</span>
+        <h2 class="h2">Você sabe exatamente <em class="s">o que está pagando.</em></h2>
+        <p class="lede">Todo plano vem com escopo por escrito: o que está incluso e o que é cobrado à parte. Sem surpresa no fim do mês.</p>
+      </div>
+      <div class="plans">
+        <article class="plan rv">
+          <div class="top"><h3>Essencial</h3></div>
+          <p class="for">Para MEI e empresas do Simples sem funcionários.</p>
+          <div class="price">Proposta fechada<small>calculada pelo volume de notas</small></div>
+          <h4>Incluso</h4>
+          <ul class="yes"><li><svg width="16" height="16"><use href="#i-check"/></svg>Apuração e guia mensal</li><li><svg width="16" height="16"><use href="#i-check"/></svg>Obrigações acessórias</li><li><svg width="16" height="16"><use href="#i-check"/></svg>Pró-labore do sócio</li><li><svg width="16" height="16"><use href="#i-check"/></svg>Portal do cliente</li></ul>
+          <h4>À parte</h4>
+          <ul class="extra"><li><svg width="16" height="16"><use href="#i-plus"/></svg>Alterações contratuais</li><li><svg width="16" height="16"><use href="#i-plus"/></svg>Declarações avulsas</li></ul>
+          <button class="btn btn-g" type="button" data-flow="contato" data-plan="Essencial">Pedir proposta</button>
+        </article>
+        <article class="plan pop rv">
+          <div class="top"><h3>Empresarial</h3><span class="badge">recomendado</span></div>
+          <p class="for">Para empresas do Simples ou do Presumido com equipe.</p>
+          <div class="price">Proposta fechada<small>calculada por notas e funcionários</small></div>
+          <h4>Incluso</h4>
+          <ul class="yes"><li><svg width="16" height="16"><use href="#i-check"/></svg>Tudo do Essencial</li><li><svg width="16" height="16"><use href="#i-check"/></svg>Folha, eSocial e FGTS Digital</li><li><svg width="16" height="16"><use href="#i-check"/></svg>Admissões, férias e rescisões</li><li><svg width="16" height="16"><use href="#i-check"/></svg>Balanço e DRE explicados</li><li><svg width="16" height="16"><use href="#i-check"/></svg>Revisão anual do regime</li></ul>
+          <h4>À parte</h4>
+          <ul class="extra"><li><svg width="16" height="16"><use href="#i-plus"/></svg>BPO financeiro</li><li><svg width="16" height="16"><use href="#i-plus"/></svg>Consultoria da reforma</li></ul>
+          <button class="btn btn-p" type="button" data-flow="contato" data-plan="Empresarial">Pedir proposta</button>
+        </article>
+        <article class="plan rv">
+          <div class="top"><h3>Consultivo</h3></div>
+          <p class="for">Para Lucro Presumido ou Real que querem decidir com números.</p>
+          <div class="price">Proposta fechada<small>sob medida para a operação</small></div>
+          <h4>Incluso</h4>
+          <ul class="yes"><li><svg width="16" height="16"><use href="#i-check"/></svg>Tudo do Empresarial</li><li><svg width="16" height="16"><use href="#i-check"/></svg>Planejamento tributário contínuo</li><li><svg width="16" height="16"><use href="#i-check"/></svg>Plano completo da reforma</li><li><svg width="16" height="16"><use href="#i-check"/></svg>Reunião mensal de resultados</li></ul>
+          <h4>À parte</h4>
+          <ul class="extra"><li><svg width="16" height="16"><use href="#i-plus"/></svg>Projetos especiais</li></ul>
+          <button class="btn btn-g" type="button" data-flow="contato" data-plan="Consultivo">Pedir proposta</button>
+        </article>
+      </div>
+      <div class="scope rv"><svg width="20" height="20" style="flex:none;color:var(--brand)"><use href="#i-shield"/></svg><span>Antes de começar, você recebe o escopo por escrito. Se surgir algo fora dele, a gente avisa o valor antes de fazer.</span></div>
+    </div>
+  </section>
+
+  <!-- TROCA -->
+  <section class="sec" id="troca" style="padding-top:0">
+    <div class="wrap switch">
+      <div>
+        <div class="sec-head rv" style="margin-bottom:28px">
+          <span class="eyebrow">Trocar de contador</span>
+          <h2 class="h2">Mudar de escritório <em class="s">sem dor de cabeça.</em></h2>
+          <p class="lede">Você não precisa falar com o contador antigo nem juntar papelada. A gente conduz cada passo.</p>
+        </div>
+        <ol class="steps">
+          <li class="rv"><div><b>Você pede a proposta</b><p>Contamos o regime, o número de notas e de funcionários e mandamos o escopo e o valor por escrito.</p></div></li>
+          <li class="rv"><div><b>Cuidamos da transição</b><p>Formalizamos a saída com o escritório anterior e recebemos os arquivos e acessos necessários.</p></div></li>
+          <li class="rv"><div><b>Revisamos o histórico</b><p>Conferimos os últimos períodos e mostramos se há pendências ou impostos pagos a mais.</p></div></li>
+          <li class="rv"><div><b>Você começa no portal</b><p>Acesso liberado, lista de documentos do mês e um contador responsável pela sua empresa.</p></div></li>
+        </ol>
+      </div>
+      <aside class="switch-card rv">
+        <span class="eyebrow">Sinais de que está na hora</span>
+        <ul class="why"><li>Demora dias para responder</li><li>Cobra extra por tudo, sem combinar antes</li><li>Você só descobre problema quando chega multa</li><li>Ninguém explicou o que a reforma muda para você</li></ul>
+        <p>Se você se identificou com algum, vale uma conversa. Sem compromisso.</p>
+        <button class="btn btn-p" type="button" data-flow="trocar">Quero trocar de contador <svg width="18" height="18" class="arr"><use href="#i-arr"/></svg></button>
+      </aside>
+    </div>
+  </section>
+
+  <!-- SEGMENTOS -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head rv"><span class="eyebrow">Para quem</span><h2 class="h2">Quem entende do seu setor <em class="s">erra menos.</em></h2></div>
+      <div class="segs rv">
+        <div class="seg"><b>Prestadores de serviço</b><p>Consultorias, agências e escritórios. Atenção ao Fator R e à reforma.</p></div>
+        <div class="seg"><b>Saúde</b><p>Clínicas, consultórios e profissionais da saúde, com as reduções que se aplicam.</p></div>
+        <div class="seg"><b>Comércio</b><p>Lojas e distribuidores, com estoque, substituição tributária e créditos.</p></div>
+        <div class="seg"><b>Tecnologia</b><p>Empresas de software e startups, do primeiro CNPJ ao crescimento.</p></div>
+        <div class="seg"><b>Construção e engenharia</b><p>Obras, folha de campo e retenções nas notas.</p></div>
+        <div class="seg"><b>Profissionais liberais</b><p>Advocacia, arquitetura e engenharia, com a redução da reforma para profissões regulamentadas.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sec" id="faq" style="padding-top:0">
+    <div class="wrap faq-grid">
+      <div class="sec-head rv" style="margin:0">
+        <span class="eyebrow">Perguntas frequentes</span>
+        <h2 class="h2">Antes de você <em class="s">perguntar.</em></h2>
+        <button class="btn btn-g" type="button" data-flow="contato" style="justify-self:start;margin-top:8px">Outra dúvida? Fale com a gente</button>
+      </div>
+      <div class="faq rv">
+        <details><summary>Quanto custa a mensalidade?<i><svg width="14" height="14"><use href="#i-plus"/></svg></i></summary><div class="ans"><p>Depende do regime, do número de notas e de funcionários. Você recebe uma proposta fechada, com o escopo por escrito, antes de decidir.</p></div></details>
+        <details><summary>Vocês atendem empresas fora de Goiânia?<i><svg width="14" height="14"><use href="#i-plus"/></svg></i></summary><div class="ans"><p>Sim. O atendimento é 100% digital, com portal, WhatsApp e reuniões por vídeo.</p></div></details>
+        <details><summary>Como envio os documentos todo mês?<i><svg width="14" height="14"><use href="#i-plus"/></svg></i></summary><div class="ans"><p>Pelo portal do cliente, que mostra a lista do que falta. Se algo atrasar, você recebe um lembrete no WhatsApp.</p></div></details>
+        <details><summary>Trocar de contador dá trabalho?<i><svg width="14" height="14"><use href="#i-plus"/></svg></i></summary><div class="ans"><p>Para você, quase nenhum. Nós formalizamos a saída com o escritório anterior, recebemos os arquivos e revisamos o histórico.</p></div></details>
+        <details><summary>A reforma tributária vai aumentar meu imposto?<i><svg width="14" height="14"><use href="#i-plus"/></svg></i></summary><div class="ans"><p>Depende do setor, do regime e de quanto você compra de fornecedores. A alíquota padrão ainda não foi fixada, por isso a forma segura é simular com os dados da sua empresa.</p><p>Faça o diagnóstico grátis para ver o seu nível de atenção.</p></div></details>
+        <details><summary>Em quanto tempo vocês respondem?<i><svg width="14" height="14"><use href="#i-plus"/></svg></i></summary><div class="ans"><p>Cada pedido entra no portal com responsável e prazo combinado no contrato, para nada se perder no meio das conversas.</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="sec dark final" id="contato">
+    <div class="glow a"></div>
+    <div class="wrap final-grid">
+      <div class="rv" style="display:grid;gap:20px">
+        <span class="eyebrow">Contato</span>
+        <h2>Vamos colocar a sua empresa <em class="s">um passo à frente?</em></h2>
+        <p class="lede">Conte o que você precisa. Sua mensagem chega organizada no nosso WhatsApp e um contador responde por lá.</p>
+      </div>
+      <form class="form rv" id="contactForm">
+        <div class="two">
+          <label for="c-nome">Seu nome<input id="c-nome" autocomplete="name" placeholder="Maria Souza"></label>
+          <label for="c-emp">Empresa<input id="c-emp" autocomplete="organization" placeholder="Souza Engenharia"></label>
+        </div>
+        <label for="c-ass">Assunto
+          <select id="c-ass"><option>Quero uma proposta</option><option>Abrir empresa</option><option>Trocar de contador</option><option>Sair do MEI</option><option>Reforma tributária</option><option>Já sou cliente</option></select>
+        </label>
+        <label for="c-msg">Mensagem<textarea id="c-msg" placeholder="Ex.: somos do Simples, temos 8 funcionários e queremos entender a reforma."></textarea></label>
+        <a class="btn btn-p" id="c-send" href="#" target="_blank" rel="noopener"><svg width="18" height="18"><use href="#i-wa"/></svg>Enviar pelo WhatsApp</a>
+        <small>Se o WhatsApp não abrir, chame no (62) 99158-3774.</small>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div style="display:grid;gap:14px;align-content:start">
+        <a class="logo" href="#inicio"><svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#4a72ff"/><path d="M10 8v16h12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="21.5" cy="10.5" r="2.5" fill="#ffb547"/></svg>Lumen Contabilidade</a>
+        <p>Contabilidade consultiva para empresas de serviço, comércio e profissionais liberais. Goiânia e todo o Brasil.</p>
+      </div>
+      <div><h5>Serviços</h5><ul><li><a href="#servicos">Contabilidade e fiscal</a></li><li><a href="#servicos">Folha e eSocial</a></li><li><a href="#servicos">Planejamento tributário</a></li><li><a href="#reforma">Reforma tributária</a></li></ul></div>
+      <div><h5>Comece</h5><ul><li><a href="#" data-flow="abrir">Abrir empresa</a></li><li><a href="#" data-flow="trocar">Trocar de contador</a></li><li><a href="#" data-flow="mei">Sair do MEI</a></li><li><a href="#" data-flow="diagnostico">Diagnóstico da reforma</a></li></ul></div>
+      <div><h5>Contato</h5><ul><li>WhatsApp (62) 99158-3774</li><li><a href="#" data-flow="cliente">Área do cliente</a></li><li>Goiânia · GO</li></ul></div>
+    </div>
+    <div class="big-word" aria-hidden="true">Lumen</div>
+    <div class="foot-base"><span>© <span id="yr">2026</span> Lumen Contabilidade · marca fictícia de demonstração</span><span>Site feito por <a href="https://breno-automacao.vercel.app" target="_blank" rel="noopener" style="color:#fff">Breno · Automação para Empresas</a></span></div>
+  </div>
+</footer>
+
+<button class="wa-fab" type="button" data-flow="contato" aria-label="Falar no WhatsApp"><svg width="28" height="28"><use href="#i-wa"/></svg></button>
+
+<div class="fl" id="fl" hidden>
+  <div class="fl-bg" data-close></div>
+  <div class="fl-box" role="dialog" aria-modal="true" aria-labelledby="flTitle">
+    <div class="fl-head"><b id="flTitle"></b><button class="fl-x" type="button" data-close aria-label="Fechar">×</button></div>
+    <div class="fl-bar"><i id="flBar"></i></div>
+    <div class="fl-body" id="flBody"></div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+const CONF = {"nome": "Lumen Contabilidade", "curto": "Lumen", "art": "a", "whats": "5562991583774", "whats_txt": "(62) 99158-3774"};
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const wa = text => "https://wa.me/" + CONF.whats + "?text=" + encodeURIComponent(text);
+const de = CONF.art === "a" ? "da" : "do";
+
+/* ---------- meses ---------- */
+const MESES = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+const hoje = new Date();
+$$("[data-month]").forEach(el => el.textContent = MESES[hoje.getMonth()]);
+$$("[data-month-prev]").forEach(el => el.textContent = MESES[(hoje.getMonth() + 11) % 12]);
+const yr = $("#yr"); if (yr) yr.textContent = hoje.getFullYear();
+
+/* ---------- faixa, menu ---------- */
+$("#demoX")?.addEventListener("click", () => $("#demoStrip").remove());
+const nav = $("#nav"), burger = $("#burger");
+const onScroll = () => nav.classList.toggle("scrolled", scrollY > 20);
+addEventListener("scroll", onScroll, {passive: true}); onScroll();
+burger.addEventListener("click", () => {
+  const open = !nav.classList.contains("open");
+  $("#mnav").style.top = nav.getBoundingClientRect().bottom + "px";
+  nav.classList.toggle("open", open); burger.setAttribute("aria-expanded", open);
+});
+$$("#mnav a").forEach(a => a.addEventListener("click", () => { nav.classList.remove("open"); burger.setAttribute("aria-expanded", "false"); }));
+
+/* ---------- rolagem suave ---------- */
+let lenis = null;
+if (window.Lenis && !reduce) {
+  lenis = new Lenis({lerp: 0.1});
+  const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
+  requestAnimationFrame(raf);
+}
+$$('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
+  const id = a.getAttribute("href");
+  if (id.length < 2 || a.hasAttribute("data-flow")) return;
+  const el = document.querySelector(id); if (!el) return;
+  e.preventDefault();
+  if (lenis) lenis.scrollTo(el, {offset: id === "#inicio" ? 0 : -72});
+  else el.scrollIntoView({behavior: reduce ? "auto" : "smooth"});
+}));
+
+/* ---------- campo de pontos do hero ---------- */
+(function field(){
+  const cv = $("#field"); if (!cv) return;
+  const cx = cv.getContext("2d"); let w, h, dpr, run = true, t = 0;
+  const COLS = 46, ROWS = 26;
+  function size(){ dpr = Math.min(devicePixelRatio || 1, 2); w = cv.clientWidth; h = cv.clientHeight; cv.width = w * dpr; cv.height = h * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  function draw(){
+    cx.clearRect(0, 0, w, h);
+    const fov = 320, camY = 120, horizon = h * 0.42;
+    for (let r = 0; r < ROWS; r++){
+      for (let c = 0; c < COLS; c++){
+        const x = (c - COLS / 2) * 46;
+        const z = 80 + r * 46;
+        const y = Math.sin(c * 0.32 + t) * 14 + Math.cos(r * 0.4 + t * 0.8) * 14;
+        const s = fov / z;
+        const px = w / 2 + x * s;
+        const py = horizon + (camY - y) * s;
+        if (px < -10 || px > w + 10 || py > h + 10) continue;
+        const a = Math.max(0, Math.min(1, 1 - r / ROWS)) * 0.55;
+        const hl = (c + r) % 11 === 0;
+        cx.fillStyle = hl ? `rgba(255,181,71,${a})` : `rgba(134,162,255,${a})`;
+        const rad = Math.min(2.2, Math.max(0.6, 1.9 * s));
+        cx.beginPath(); cx.arc(px, py, rad, 0, Math.PI * 2); cx.fill();
+      }
+    }
+  }
+  function loop(){ if (!run) return; t += 0.012; draw(); requestAnimationFrame(loop); }
+  size(); draw();
+  addEventListener("resize", () => { size(); draw(); });
+  if (reduce) return;
+  new IntersectionObserver(([e]) => { const was = run; run = e.isIntersecting; if (run && !was) loop(); }).observe(cv);
+  loop();
+})();
+
+/* ---------- inclinação do painel 3D ---------- */
+const stage = $("#stage"), inner = $("#stageInner");
+if (stage && matchMedia("(hover:hover) and (min-width:901px)").matches && !reduce){
+  stage.addEventListener("pointermove", e => {
+    const r = stage.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    inner.style.transform = `rotateX(${8 - y * 10}deg) rotateY(${-14 + x * 16}deg)`;
+  });
+  stage.addEventListener("pointerleave", () => inner.style.transform = "");
+}
+
+/* ---------- animações (GSAP) ---------- */
+if (window.gsap && window.ScrollTrigger && !reduce){
+  window.__anim = true;
+  gsap.registerPlugin(ScrollTrigger);
+  if (lenis) { lenis.on("scroll", ScrollTrigger.update); }
+  const intro = gsap.timeline({defaults: {ease: "power3.out"}});
+  intro.from(".hero-copy > *", {y: 34, opacity: 0, duration: 1, stagger: .09})
+       .from(".ui-main", {y: 60, opacity: 0, rotateX: 18, duration: 1.2}, "-=.8")
+       .from(".float", {y: 40, opacity: 0, duration: .9, stagger: .12}, "-=.8");
+  gsap.to(".float .row", {y: -8, duration: 2.6, ease: "sine.inOut", yoyo: true, repeat: -1, stagger: .5});
+
+  ScrollTrigger.batch(".rv", {
+    start: "top 88%",
+    onEnter: els => gsap.to(els, {opacity: 1, y: 0, duration: .9, ease: "power3.out", stagger: .08, overwrite: true, clearProps: "transform"})
+  });
+  gsap.from(".mini-bars i", {scaleY: 0, transformOrigin: "bottom", duration: 1, ease: "power3.out", stagger: .07, scrollTrigger: {trigger: ".mini-bars", start: "top 85%"}});
+
+  const mm = gsap.matchMedia();
+  mm.add("(min-width: 901px)", () => {
+    const tl = $("#tl"), outer = $("#tlOuter");
+    const dist = () => Math.max(0, tl.scrollWidth - outer.clientWidth + 40);
+    if (dist() < 40) return;
+    gsap.to(tl, {x: () => -dist(), ease: "none", scrollTrigger: {trigger: outer, start: "center center", end: () => "+=" + dist(), pin: true, scrub: .6, invalidateOnRefresh: true, anticipatePin: 1}});
+  });
+  addEventListener("load", () => ScrollTrigger.refresh());
+} else {
+  document.documentElement.classList.remove("js");
+}
+
+/* ---------- abas do portal ---------- */
+const tabs = $$('[role="tab"]');
+function selectTab(tab){
+  tabs.forEach(t => { const on = t === tab; t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1;
+    const p = document.getElementById(t.getAttribute("aria-controls")); p.hidden = !on; p.classList.toggle("on", on); });
+  if (tab.id === "tb-rel" && window.gsap && !reduce) gsap.from("#pn-rel .bars .b i", {scaleY: 0, duration: .8, ease: "power3.out", stagger: .04});
+}
+tabs.forEach((t, i) => {
+  t.addEventListener("click", () => selectTab(t));
+  t.addEventListener("keydown", e => {
+    if (e.key !== "ArrowDown" && e.key !== "ArrowUp" && e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    e.preventDefault(); const d = (e.key === "ArrowDown" || e.key === "ArrowRight") ? 1 : -1;
+    const n = tabs[(i + d + tabs.length) % tabs.length]; n.focus(); selectTab(n);
+  });
+});
+
+/* ---------- checklist ---------- */
+const cks = $$("#checkAbrir input");
+const ckUpd = () => $("#ckCount").textContent = cks.filter(c => c.checked).length + " de " + cks.length + " prontos";
+cks.forEach(c => c.addEventListener("change", ckUpd));
+
+/* ---------- contato final ---------- */
+function contactLink(){
+  const v = id => $(id).value.trim();
+  const L = ["Olá, " + CONF.curto + "! Vim pelo site.", "Assunto: " + v("#c-ass"), v("#c-nome") && "Nome: " + v("#c-nome"), v("#c-emp") && "Empresa: " + v("#c-emp"), v("#c-msg") && "Mensagem: " + v("#c-msg")].filter(Boolean);
+  $("#c-send").href = wa(L.join("\n"));
+}
+["#c-nome","#c-emp","#c-msg"].forEach(s => $(s).addEventListener("input", contactLink));
+$("#c-ass").addEventListener("change", contactLink);
+$("#contactForm").addEventListener("submit", e => e.preventDefault());
+contactLink();
+
+/* ---------- diagnóstico da reforma ---------- */
+function diagnose(a){
+  const normal = a.reg === "presumido" || a.reg === "real";
+  const b2b = a.cli === "pj" || a.cli === "ambos";
+  const pts = [], todo = []; let s = 0;
+  const P = (txt, alert) => pts.push({txt, alert});
+  const quem = CONF.art + " " + CONF.nome;
+  if (a.reg === "naosei"){ s += 2;
+    P("O primeiro passo é confirmar o seu regime. O efeito da reforma muda muito entre Simples, Lucro Presumido e Lucro Real.", true);
+    todo.push("Confirmar o regime da empresa com " + quem + "."); }
+  if (normal){ s += 2;
+    P("Sua empresa entra direto no modelo novo: a CBS substitui PIS e Cofins em 2027, e o IBS substitui ICMS e ISS aos poucos, de 2029 a 2033.", true);
+    P("Aos poucos, parte do imposto pode ser separada direto no recebimento (Pix, cartão, boleto), o chamado split payment. Isso mexe no caixa.");
+    todo.push("Simular o preço de venda com CBS e IBS."); }
+  if (a.reg === "simples"){
+    P("O Simples Nacional continua. Você segue pagando na guia única.");
+    if (b2b){ s += 2;
+      P("Quem compra de empresa do Simples recebe menos crédito de imposto, e seus clientes empresas vão olhar isso. A partir de 2027 dá para escolher pagar CBS e IBS por fora do Simples, gerando crédito completo. A escolha vale por semestre e tem prazo.", true);
+      todo.push("Simular com " + quem + " se vale pagar CBS e IBS por fora do Simples."); }
+    else P("Vendendo ao consumidor final, pagar CBS e IBS por fora do Simples quase nunca compensa. A tendência é seguir como está.");
+  }
+  if (a.reg === "mei"){
+    P("O MEI continua com o valor fixo mensal. Para você, muda pouco agora.");
+    if (b2b){ s += 1; P("Compras de MEI geram pouco crédito para as empresas que compram de você. Se seus clientes são empresas, vale acompanhar."); }
+  }
+  if (normal || a.reg === "naosei"){
+    if (a.ativ === "servicos" && a.compras !== "muito"){ s += 2;
+      P("Empresas de serviço com poucas compras têm pouco crédito para abater e podem sentir mais a mudança.", true); }
+    if (a.compras === "muito") P("Como as compras pesam bastante, o crédito pode ajudar: o imposto pago nas compras abate o que você deve. Isso só vale com fornecedor que emite nota corretamente.");
+    if (a.compras === "naosei"){ s += 1; P("Saber quanto você compra com nota é o que define o seu crédito no modelo novo."); }
+    if (a.compras !== "pouco") todo.push("Listar os principais fornecedores e conferir se emitem nota corretamente.");
+  }
+  if (a.ativ === "saude"){ P("Alguns serviços de saúde e de educação têm redução de 60% na alíquota de CBS e IBS, com condições."); todo.push("Confirmar se a sua atividade está na lista de redução."); }
+  if (a.ativ === "regulamentada"){ P("Profissões regulamentadas têm redução de 30% na alíquota de CBS e IBS, com condições."); todo.push("Confirmar se a sua atividade está na lista de redução."); }
+  if (a.ativ === "comercio") P("Itens da Cesta Básica Nacional ficam com alíquota zero, e alguns alimentos têm redução de 60%. Se você vende esses produtos, isso entra na conta.");
+  if (a.ativ === "industria") P("A partir de 2027 o IPI fica zerado para a maioria dos produtos. A exceção são produtos que também têm incentivo na Zona Franca de Manaus.");
+  if (a.nota !== "sim"){
+    if (normal || a.reg === "naosei"){ s += 2;
+      P("Desde 2026 as notas do Lucro Presumido e do Real precisam trazer os campos de CBS e IBS. Neste ano de teste o valor destacado não é cobrado, mas só para quem cumpre essas regras.", true); }
+    else { s += 1; P("Em 2026 o " + (a.reg === "mei" ? "MEI" : "Simples") + " não precisa destacar CBS e IBS na nota, mas os sistemas vão mudar. Vale saber como o seu fornecedor vai se adaptar."); }
+    todo.push("Falar com o fornecedor do sistema de notas fiscais.");
+  }
+  if (a.contr === "sim"){ s += 1;
+    P("Contratos longos com preço fixo podem ficar desequilibrados com a troca de impostos.", true);
+    todo.push("Revisar os contratos longos e incluir cláusula de reajuste por mudança de tributos."); }
+  todo.push("Acompanhar as mudanças de prazo, que ainda podem acontecer.");
+  return {pts, todo: [...new Set(todo)], lv: s >= 5 ? 2 : s >= 2 ? 1 : 0, s};
+}
+const LV = [
+  {n: "Baixo", c: "var(--mint)", t: "Poucos pontos da reforma pedem ação agora. Vale acompanhar as próximas etapas."},
+  {n: "Médio", c: "var(--amber)", t: "Alguns pontos pedem atenção nos próximos meses. Dá para se preparar com calma, mas sem deixar para depois."},
+  {n: "Alto", c: "var(--rose)", t: "Vários pontos da reforma pesam no seu caso. O ideal é analisar com o seu contador ainda este ano."}
+];
+
+/* ---------- fluxos guiados ---------- */
+const REGIME = [["simples","Simples Nacional"],["presumido","Lucro Presumido"],["real","Lucro Real"],["naosei","Não sei"]];
+const FUNC = [["0","Nenhum"],["1-5","De 1 a 5"],["6-20","De 6 a 20"],["20+","Mais de 20"]];
+const FLOWS = {
+  contato: {title: "Falar com um contador", subject: "Contato",
+    steps: [{id: "assunto", q: "Como podemos ajudar?", o: [["proposta","Quero uma proposta",null,"proposta"],["abrir","Abrir minha empresa",null,"abrir"],["trocar","Trocar de contador",null,"trocar"],["mei","Sair do MEI",null,"mei"],["reforma","Entender a reforma tributária","Diagnóstico grátis em 2 minutos","diagnostico"],["cliente","Já sou cliente",null,"cliente"]]}]},
+  proposta: {title: "Pedir proposta", subject: "Proposta",
+    steps: [
+      {id: "regime", q: "Qual é o regime da empresa?", o: [["mei","MEI"], ...REGIME]},
+      {id: "func", q: "Quantos funcionários?", o: FUNC},
+      {id: "notas", q: "Quantas notas fiscais por mês, entre emitidas e recebidas?", o: [["ate20","Até 20"],["21-100","De 21 a 100"],["100+","Mais de 100"],["naosei","Não sei"]]}
+    ], done: "Pronto. Com isso a gente monta uma proposta fechada, com o escopo por escrito."},
+  abrir: {title: "Abrir empresa", subject: "Abrir empresa",
+    steps: [
+      {id: "ativ", q: "Qual vai ser a atividade principal?", o: [["servicos","Prestação de serviços"],["comercio","Comércio"],["industria","Indústria"],["saude","Saúde","Clínica, consultório, profissional da saúde"],["regulamentada","Profissão regulamentada","Advocacia, engenharia, arquitetura e similares"],["tech","Tecnologia","Software, agência digital, startup"]]},
+      {id: "socios", q: "Vai abrir sozinho ou com sócios?", o: [["sozinho","Sozinho"],["socios","Com sócios"]]},
+      {id: "fat", q: "Quanto espera faturar por mês no começo?", o: [["ate10","Até R$ 10 mil"],["10-50","De R$ 10 mil a R$ 50 mil"],["50-200","De R$ 50 mil a R$ 200 mil"],["200+","Acima de R$ 200 mil"],["naosei","Ainda não sei"]]},
+      {id: "func", q: "Vai ter funcionários no primeiro ano?", o: [["0","Não"],["1-5","De 1 a 5"],["6+","Mais de 5"]]},
+      {id: "quando", q: "Quando quer começar?", o: [["ja","Este mês"],["3m","Nos próximos 3 meses"],["pesq","Ainda estou pesquisando"]]}
+    ], done: "Pronto. Um contador vai te mostrar o formato e o regime que fazem você pagar menos, dentro da lei."},
+  trocar: {title: "Trocar de contador", subject: "Trocar de contador",
+    steps: [
+      {id: "regime", q: "Qual é o regime da empresa hoje?", o: REGIME},
+      {id: "func", q: "Quantos funcionários?", o: FUNC},
+      {id: "notas", q: "Quantas notas fiscais por mês, entre emitidas e recebidas?", o: [["ate20","Até 20"],["21-100","De 21 a 100"],["100+","Mais de 100"],["naosei","Não sei"]]},
+      {id: "motivo", q: "O que mais incomoda no contador atual?", o: [["demora","Demora para responder"],["extra","Cobra extra sem combinar antes"],["erros","Erros ou multas"],["orient","Falta de orientação"],["outro","Outro motivo"]]},
+      {id: "quando", q: "Quando gostaria de trocar?", o: [["ja","Assim que possível"],["mes","A partir do próximo mês"],["comp","Por enquanto, só quero comparar"]]}
+    ], done: "Pronto. A gente prepara a proposta e explica como conduz a transição, sem você precisar falar com o escritório atual."},
+  mei: {title: "Sair do MEI", subject: "Sair do MEI",
+    steps: [
+      {id: "motivo", q: "Por que precisa sair do MEI?", o: [["limite","Passei ou vou passar do limite de faturamento"],["func","Quero contratar mais de um funcionário"],["ativ","Minha atividade não é permitida no MEI"],["socio","Quero ter sócio"],["outro","Outro motivo"]]},
+      {id: "ativ", q: "Qual é a sua atividade?", o: [["servicos","Prestação de serviços"],["comercio","Comércio"],["industria","Indústria"]]},
+      {id: "urg", q: "Qual é a urgência?", o: [["ja","Já aconteceu"],["breve","Vai acontecer em breve"],["plan","Estou me planejando"]]}
+    ], done: "Pronto. Um contador vai te explicar o caminho e o regime mais vantajoso para quem saiu do MEI."},
+  cliente: {title: "Área do cliente", subject: "Já sou cliente",
+    steps: [{id: "pedido", q: "O que você precisa?", o: [["docs","Enviar documentos"],["guia","Segunda via de guia"],["decl","Declaração ou relatório"],["contador","Falar com o meu contador"],["portal","Ajuda para acessar o portal"]]}],
+    done: "Pronto. Seu pedido chega no WhatsApp e entra na fila do seu contador."},
+  diagnostico: {title: "Diagnóstico da reforma", subject: "Diagnóstico da reforma tributária", result: true,
+    steps: [
+      {id: "reg", q: "Qual é o regime da sua empresa?", h: "Se não tiver certeza, escolha \"Não sei\". Isso também entra no diagnóstico.", o: [["mei","MEI"],["simples","Simples Nacional"],["presumido","Lucro Presumido"],["real","Lucro Real"],["naosei","Não sei"]]},
+      {id: "ativ", q: "Qual é a atividade principal?", o: [["servicos","Prestação de serviços"],["comercio","Comércio"],["industria","Indústria"],["saude","Saúde ou educação","Clínicas, consultórios, escolas, cursos"],["regulamentada","Profissão regulamentada","Advocacia, engenharia, arquitetura e similares"]]},
+      {id: "cli", q: "Para quem você vende?", h: "Pense na maior parte do faturamento.", o: [["pf","Consumidor final","Pessoas físicas"],["pj","Outras empresas"],["ambos","Os dois"]]},
+      {id: "compras", q: "As compras pesam nos seus custos?", h: "Mercadorias, insumos e serviços que você compra com nota fiscal.", o: [["muito","Pesam bastante"],["pouco","Pesam pouco","O maior custo é a equipe"],["naosei","Não sei"]]},
+      {id: "nota", q: "Seu sistema de notas fiscais já está pronto para a reforma?", h: "Os campos novos de CBS e IBS.", o: [["sim","Sim, já está"],["nao","Ainda não"],["naosei","Não sei"]]},
+      {id: "contr", q: "Tem contratos de mais de um ano com preço fixo?", h: "Aluguel, prestação de serviço contínua, fornecimento.", o: [["sim","Sim"],["nao","Não"]]},
+      {id: "cliente", q: "Você já é cliente " + de + " " + CONF.nome + "?", o: [["sim","Sim"],["nao","Ainda não"]]}
+    ]}
+};
+
+const fl = $("#fl"), flBody = $("#flBody"), flBar = $("#flBar"), flTitle = $("#flTitle");
+let F = null, step = 0, ans = {}, extra = {}, lastFocus = null, diag = null;
+
+function openFlow(name, opts = {}){
+  F = FLOWS[name]; step = 0; ans = {}; extra = opts; diag = null;
+  if (!fl.hidden) { renderStep(); return; }
+  lastFocus = document.activeElement;
+  fl.hidden = false; document.body.style.overflow = "hidden"; lenis?.stop();
+  renderStep();
+}
+function closeFlow(){
+  fl.hidden = true; document.body.style.overflow = ""; lenis?.start();
+  lastFocus?.focus?.();
+}
+function label(st, v){ const o = st.o.find(x => x[0] === v); return o ? o[1] : v; }
+
+function renderStep(){
+  flTitle.textContent = F.title;
+  const total = F.steps.length;
+  flBar.style.width = Math.round(step / (total + 1) * 100) + "%";
+  const st = F.steps[step];
+  flBody.innerHTML = "";
+  const box = document.createElement("div"); box.className = "fl-step";
+  box.innerHTML = '<small class="c"></small><h3 tabindex="-1"></h3><p class="help"></p><div class="opts"></div><div class="fl-nav"><button class="linkb" type="button"></button><span></span></div>';
+  box.querySelector(".c").textContent = total > 1 ? "Pergunta " + (step + 1) + " de " + total : "";
+  box.querySelector("h3").textContent = st.q;
+  const help = box.querySelector(".help"); help.textContent = st.h || ""; help.hidden = !st.h;
+  st.o.forEach(([v, lab, sub, go]) => {
+    const b = document.createElement("button"); b.type = "button"; b.className = "opt";
+    b.setAttribute("aria-pressed", ans[st.id] === v ? "true" : "false");
+    const sp = document.createElement("span"); sp.textContent = lab; b.appendChild(sp);
+    if (sub){ const sm = document.createElement("small"); sm.textContent = sub; b.appendChild(sm); }
+    b.addEventListener("click", () => {
+      if (go){ openFlow(go, extra); return; }
+      ans[st.id] = v;
+      if (step < total - 1){ step++; renderStep(); }
+      else if (F.result){ renderResult(); }
+      else renderContact();
+    });
+    box.querySelector(".opts").appendChild(b);
+  });
+  const back = box.querySelector(".linkb");
+  back.textContent = step === 0 ? "Fechar" : "Voltar";
+  back.addEventListener("click", () => { if (step === 0) closeFlow(); else { step--; renderStep(); } });
+  flBody.appendChild(box);
+  box.querySelector("h3").focus({preventScroll: true});
+  $(".fl-box").scrollTop = 0;
+}
+
+function renderResult(){
+  diag = diagnose(ans); const L = LV[diag.lv];
+  flBar.style.width = Math.round(F.steps.length / (F.steps.length + 1) * 100) + "%";
+  flBody.innerHTML = "";
+  const box = document.createElement("div"); box.className = "fl-step";
+  box.innerHTML = '<div class="res-lv"><small class="c">Seu diagnóstico</small><h3 tabindex="-1">Nível de atenção: <b></b></h3><div class="res-m"><i></i><i></i><i></i></div><div class="res-ml"><span>baixo</span><span>médio</span><span>alto</span></div><p class="help"></p></div>' +
+    '<div class="res-sec"><h4>O que muda no seu caso</h4><ul class="res-pts"></ul></div><div class="res-sec"><h4>O que fazer agora</h4><ol class="res-todo"></ol></div>' +
+    '<p class="res-disc">Diagnóstico informativo, com base na Emenda Constitucional 132/2023 e na Lei Complementar 214/2025. Não calcula imposto: a alíquota padrão ainda não foi fixada e prazos podem mudar por regulamentação.</p>' +
+    '<button class="btn btn-p" type="button" style="width:100%;margin-top:18px"></button><div class="fl-nav"><button class="linkb" type="button">Refazer</button><span></span></div>';
+  box.querySelector(".res-lv").style.setProperty("--lv", L.c);
+  box.querySelector("h3 b").textContent = L.n;
+  box.querySelectorAll(".res-m i").forEach((el, k) => el.classList.toggle("on", k <= diag.lv));
+  box.querySelector(".help").textContent = L.t;
+  diag.pts.forEach(p => { const li = document.createElement("li"); li.textContent = p.txt; if (p.alert) li.className = "a"; box.querySelector(".res-pts").appendChild(li); });
+  diag.todo.forEach(t => { const li = document.createElement("li"); li.textContent = t; box.querySelector(".res-todo").appendChild(li); });
+  const cta = box.querySelector(".btn");
+  cta.textContent = ans.cliente === "sim" ? "Mandar o resultado para o meu contador" : "Quero a análise completa do meu caso";
+  cta.addEventListener("click", renderContact);
+  box.querySelector(".linkb").addEventListener("click", () => { step = 0; ans = {}; renderStep(); });
+  flBody.appendChild(box);
+  box.querySelector("h3").focus({preventScroll: true});
+  $(".fl-box").scrollTop = 0;
+}
+
+function buildMsg(nome, emp){
+  const L = ["Olá, " + CONF.curto + "! Vim pelo site.", "Assunto: " + F.subject + (extra.plan ? " (plano " + extra.plan + ")" : "")];
+  if (nome) L.push("Nome: " + nome);
+  if (emp) L.push("Empresa: " + emp);
+  if (diag) L.push("Nível de atenção na reforma: " + LV[diag.lv].n);
+  F.steps.forEach(st => { if (ans[st.id] !== undefined && !st.o.some(o => o[3])) L.push(st.q.replace(/\?$/, "") + ": " + label(st, ans[st.id])); });
+  return L.join("\n");
+}
+
+function renderContact(){
+  flBar.style.width = "100%";
+  flBody.innerHTML = "";
+  const box = document.createElement("div"); box.className = "fl-step";
+  box.innerHTML = '<small class="c">Último passo</small><h3 tabindex="-1">Para quem a gente responde?</h3><p class="help"></p>' +
+    '<form class="fl-form"><label for="fl-nome">Seu nome<input id="fl-nome" autocomplete="name" placeholder="Maria Souza"></label>' +
+    '<label for="fl-emp">Empresa (se já tiver)<input id="fl-emp" autocomplete="organization" placeholder="Souza Engenharia"></label>' +
+    '<span class="preview-l">Mensagem que chega no WhatsApp ' + de + ' ' + CONF.curto + '</span><div class="preview" aria-live="polite"></div>' +
+    '<a class="btn btn-p" target="_blank" rel="noopener" style="width:100%"><svg width="18" height="18"><use href="#i-wa"/></svg>Enviar pelo WhatsApp</a>' +
+    '<small class="small-note">Se o WhatsApp não abrir, chame no ' + CONF.whats_txt + '.</small></form>' +
+    '<div class="fl-nav"><button class="linkb" type="button">Voltar</button><span></span></div>';
+  box.querySelector(".help").textContent = F.done || "Pronto. Mande o resultado e a gente responde pelo WhatsApp.";
+  const nome = box.querySelector("#fl-nome"), emp = box.querySelector("#fl-emp"), pv = box.querySelector(".preview"), a = box.querySelector("a.btn");
+  const upd = () => { const m = buildMsg(nome.value.trim(), emp.value.trim()); pv.textContent = m; a.href = wa(m); };
+  nome.addEventListener("input", upd); emp.addEventListener("input", upd); upd();
+  box.querySelector("form").addEventListener("submit", e => e.preventDefault());
+  box.querySelector(".linkb").addEventListener("click", () => { if (F.result && diag) renderResult(); else { step = F.steps.length - 1; renderStep(); } });
+  flBody.appendChild(box);
+  box.querySelector("h3").focus({preventScroll: true});
+  $(".fl-box").scrollTop = 0;
+}
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-flow]");
+  if (t){ e.preventDefault(); nav.classList.remove("open"); burger.setAttribute("aria-expanded", "false");
+    const plan = t.getAttribute("data-plan");
+    openFlow(plan ? "proposta" : t.getAttribute("data-flow"), plan ? {plan} : {}); return; }
+  if (e.target.closest("[data-close]")) closeFlow();
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !fl.hidden) closeFlow(); });
+})();
+
+</script>
+</body>
+</html>
