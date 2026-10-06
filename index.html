@@ -365,6 +365,19 @@ section{padding-block:96px}
 footer{background:var(--h-bg);color:var(--h-muted);border-top:1px solid var(--h-line)}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-block:26px 34px;font-size:14.5px}
 </style>
+<style id="v9-turbo">
+html.lenis,html.lenis body{height:auto}
+html.lenis,.lenis.lenis-smooth{scroll-behavior:auto!important}
+.fx-lit{position:absolute;inset:-10% -10% 0;background-image:linear-gradient(rgba(255,211,77,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,211,77,.6) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(230px circle at var(--sx,-999px) var(--sy,-999px),#000,transparent 72%);mask-image:radial-gradient(230px circle at var(--sx,-999px) var(--sy,-999px),#000,transparent 72%);opacity:.5}
+.fx-spot{position:absolute;left:0;top:0;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(255,211,77,.14),transparent 62%);transform:translate(calc(var(--px,-999px) - 50%),calc(var(--py,-999px) - 50%))}
+.showcase{perspective:1400px}
+/* no celular a notificação fica no meio da página: altura fixa para a troca de texto não empurrar tudo 18px */
+@media (max-width:760px){.toast{min-height:88px}}
+.js-anim .rv:not(.in){opacity:0;transform:translateY(26px)}
+.btn:active{transform:scale(.97)}
+.pain:active{transform:scale(.985)}
+@media (prefers-reduced-motion:reduce){.js-anim .rv:not(.in){opacity:1;transform:none}.fx-lit,.fx-spot{display:none}}
+</style>
 </head>
 <body>
 
@@ -845,5 +858,102 @@ if (toast && !matchMedia("(prefers-reduced-motion: reduce)").matches){
 })();
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script id="v9-turbo-js">
+(() => {
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const hasGsap = !!(window.gsap && window.ScrollTrigger);
+if (reduce) return;
+
+/* rolagem suave no mesmo relógio das animações */
+let lenis = null;
+if (window.Lenis){
+  lenis = new Lenis({lerp: 0.1});
+  if (hasGsap){ gsap.registerPlugin(ScrollTrigger); lenis.on("scroll", ScrollTrigger.update); gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0); }
+  else { const raf = t => { lenis.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf); }
+  $$('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
+    const id = a.getAttribute("href"); if (id.length < 2) return;
+    const el = document.querySelector(id); if (!el) return;
+    e.preventDefault(); lenis.scrollTo(el, {offset: id === "#topo" ? 0 : -72});
+  }));
+}
+
+/* luz que segue o dedo/mouse sobre a grade da abertura */
+const top = $(".top"), fx = $(".top .fx"), grid = $(".top .fx-grid");
+if (top && fx && grid){
+  const lit = document.createElement("div"); lit.className = "fx-lit"; lit.dataset.depth = grid.dataset.depth;
+  grid.after(lit);
+  const spot = document.createElement("div"); spot.className = "fx-spot"; fx.appendChild(spot);
+  let last = 0, px = -999, py = -999, t = 0, vis = true;
+  const put = (x, y) => { px = x; py = y; last = performance.now(); };
+  top.addEventListener("pointermove", e => put(e.clientX, e.clientY), {passive: true});
+  top.addEventListener("touchmove", e => { const p = e.touches[0]; if (p) put(p.clientX, p.clientY); }, {passive: true});
+  top.addEventListener("pointerdown", e => put(e.clientX, e.clientY), {passive: true});
+  new IntersectionObserver(([e]) => vis = e.isIntersecting).observe(top);
+  (function loop(){
+    requestAnimationFrame(loop); if (!vis) return; t += 0.01;
+    const fr = fx.getBoundingClientRect();
+    let x = px, y = py;
+    if (performance.now() - last > 2500){ x = fr.left + fr.width * (0.5 + 0.36 * Math.sin(t * 0.6)); y = fr.top + Math.min(fr.height, innerHeight) * (0.42 + 0.16 * Math.sin(t * 0.95)); }
+    lit.style.translate = grid.style.translate; // acompanha a paralaxe que já existe na grade
+    const lr = lit.getBoundingClientRect();
+    lit.style.setProperty("--sx", (x - lr.left) + "px"); lit.style.setProperty("--sy", (y - lr.top) + "px");
+    spot.style.setProperty("--px", (x - fr.left) + "px"); spot.style.setProperty("--py", (y - fr.top) + "px");
+  })();
+}
+
+if (!hasGsap) return;
+gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ignoreMobileResize: true});
+document.documentElement.classList.add("js-anim");
+
+/* entrada da abertura */
+const intro = gsap.timeline({defaults: {ease: "power3.out"}});
+intro.from(".hero > .pill, .hero > h1, .hero > .hero-lede, .hero > .hero-cta, .hero > .trust", {y: 30, opacity: 0, duration: .9, stagger: .08});
+if (matchMedia("(min-width: 761px)").matches)
+  intro.from(".showcase .win", {y: 70, rotateX: 14, opacity: 0, duration: 1.2, transformOrigin: "50% 100%", clearProps: "transform"}, "-=.6");
+
+/* números do painel contando */
+$$(".kpi b").forEach(b => {
+  const txt = b.textContent.trim(), m = txt.match(/^(\D*)([\d.]+)(\D*)$/); if (!m) return;
+  const end = parseInt(m[2].replace(/\./g, ""), 10), o = {v: 0};
+  gsap.to(o, {v: end, duration: 1.6, delay: .9, ease: "power2.out", onUpdate: () => b.textContent = m[1] + Math.round(o.v).toLocaleString("pt-BR") + m[3]});
+});
+
+/* aparece ao rolar, sem saltos (só o que ainda está abaixo da tela) */
+const targets = $$(".sec-head, .pain, .sol, .mstep, .promise, .aw, .funnel, .verdict, .day-switch, .founder").filter(el => el.getBoundingClientRect().top > innerHeight);
+targets.forEach(el => el.classList.add("rv"));
+ScrollTrigger.batch(targets, {start: "top 90%", once: true,
+  onEnter: els => gsap.to(els, {opacity: 1, y: 0, duration: .85, ease: "power3.out", stagger: .07, overwrite: true,
+    onComplete: () => els.forEach(el => { el.classList.add("in"); el.style.removeProperty("opacity"); el.style.removeProperty("transform"); })})});
+
+const mm = gsap.matchMedia();
+/* celular: painel assenta em 3D; celular e notificação em paralaxe */
+mm.add("(max-width: 760px)", () => {
+  gsap.fromTo(".showcase .win", {rotateX: 16, scale: .95, transformOrigin: "50% 100%"}, {rotateX: 0, scale: 1, ease: "none", immediateRender: false,
+    scrollTrigger: {trigger: ".showcase", start: "top 95%", end: "top 30%", scrub: .5}});
+  const ph = $(".showcase .phone"), to = $(".showcase .toast");
+  const st = ScrollTrigger.create({trigger: ".showcase", start: "top bottom", end: "bottom top", scrub: true, onUpdate: s => {
+    if (ph) ph.style.translate = "0 " + (-s.progress * 60).toFixed(1) + "px";
+    if (to) to.style.translate = "0 " + (-s.progress * 28).toFixed(1) + "px";
+  }});
+  return () => { st.kill(); if (ph) ph.style.translate = ""; if (to) to.style.translate = ""; };
+});
+/* computador: painel inclina levemente seguindo o mouse */
+mm.add("(min-width: 1001px) and (hover: hover)", () => {
+  const win = $(".showcase .win"), sc = $(".showcase"); if (!win || !sc) return;
+  const rx = gsap.quickTo(win, "rotationX", {duration: .6, ease: "power3"}), ry = gsap.quickTo(win, "rotationY", {duration: .6, ease: "power3"});
+  const mv = e => { const r = sc.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - .5) * 6); rx(-((e.clientY - r.top) / r.height - .5) * 4); };
+  const lv = () => { rx(0); ry(0); };
+  intro.eventCallback("onComplete", () => { sc.addEventListener("pointermove", mv); sc.addEventListener("pointerleave", lv); });
+  return () => { sc.removeEventListener("pointermove", mv); sc.removeEventListener("pointerleave", lv); gsap.set(win, {clearProps: "transform"}); };
+});
+addEventListener("load", () => ScrollTrigger.refresh());
+document.fonts?.ready.then(() => ScrollTrigger.refresh());
+})();
+</script>
 </body>
 </html>
