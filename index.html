@@ -11,7 +11,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2313201B'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='900' font-size='19' fill='%23F1F4EF' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='4 5 90 90'%3E%3Crect x='4' y='5' width='90' height='90' rx='20' fill='%230B0B0B'/%3E%3Cg fill='none' stroke='%23FFD34D' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 82H40V58H64V34L84.5 14.2'/%3E%3Cpath d='M83.43 27.72L88 12L71.93 15.2'/%3E%3C/g%3E%3Cg fill='%23FFD34D'%3E%3Ccircle cx='16' cy='82' r='10.8'/%3E%3Ccircle cx='40' cy='58' r='10.8'/%3E%3Ccircle cx='64' cy='34' r='10.8'/%3E%3C/g%3E%3C/svg%3E">
 <title>Breno | Automação para Empresas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,7 +78,8 @@ section[id],.top[id]{scroll-margin-top:72px}
 .nav{position:fixed;top:0;left:0;right:0;padding-top:env(safe-area-inset-top,0px);z-index:30;background:rgba(11,20,17,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--h-line)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.brand-mark{width:36px;height:36px;border-radius:10px;background:var(--marker);color:#14201B;display:grid;place-items:center;font:800 19px/1 var(--f-sans)}
+.brand-mark{width:38px;height:38px;flex:none;display:block}
+.brand-mark svg{width:100%;height:100%;display:block}
 .brand b{font:800 17px/1.1 var(--f-sans);display:block;letter-spacing:-.01em}
 .brand small{font:500 12.5px/1.3 var(--f-sans);color:var(--h-muted)}
 .nav-links{display:flex;gap:26px;align-items:center}
@@ -385,8 +386,8 @@ html.lenis,.lenis.lenis-smooth{scroll-behavior:auto!important}
 <header class="nav">
     <div class="wrap">
       <a class="brand" href="#topo" aria-label="Início">
-        <span class="brand-mark">B</span>
-        <span><b>Breno</b><small>Automação para Empresas</small></span>
+        <span class="brand-mark"><svg viewBox="4 5 90 90" aria-hidden="true"><g fill="none" stroke="#FFD34D" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><path d="M16 82H40V58H64V34L84.5 14.2"/><path d="M83.43 27.72L88 12L71.93 15.2"/></g><g fill="#FFD34D"><circle cx="16" cy="82" r="10.8"/><circle cx="40" cy="58" r="10.8"/><circle cx="64" cy="34" r="10.8"/></g></svg></span>
+        <span><b>BrenoAutomação</b><small>para Empresas</small></span>
       </a>
       <nav class="nav-links" aria-label="Seções">
         <a href="#diagnostico">Onde você perde tempo</a>
@@ -718,7 +719,7 @@ html.lenis,.lenis.lenis-smooth{scroll-behavior:auto!important}
 </div>
 <footer>
   <div class="wrap">
-    <span>Breno · Automação para Empresas · WhatsApp (62) 99158-3774</span>
+    <span style="display:inline-flex;align-items:center;gap:9px"><svg viewBox="4 5 90 90" width="20" height="20" style="flex:none" aria-hidden="true"><g fill="none" stroke="#FFD34D" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><path d="M16 82H40V58H64V34L84.5 14.2"/><path d="M83.43 27.72L88 12L71.93 15.2"/></g><g fill="#FFD34D"><circle cx="16" cy="82" r="10.8"/><circle cx="40" cy="58" r="10.8"/><circle cx="64" cy="34" r="10.8"/></g></svg>BrenoAutomação para Empresas · WhatsApp (62) 99158-3774</span>
     <span>© 2026</span>
   </div>
 </footer>
